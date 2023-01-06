@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <script src="{% static '/js/html5-qrcode.min.js' %}"></script>
+
+    <body class="g-sidenav-show  bg-gray-200">
+    {% include "aside.html" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        {% include 'navbar.html' %}
+
+        <div class="card col-6 mx-xl-auto my-xl-6" data-animation="true">
+
+            <h5 class="badge-pill badge-lgbadge bg-gradient-danger text-white rounded p-3 font-weight-normal">
+                {{ appeal.theme }}
+            </h5>
+
+            <div class="card-body text-xxl-start">
+
+
+                <span class="badge bg-gradient-danger  m-2" style="float:right;">Holati :
+                    {% if appeal.status %}Bajarilgan{% else %}Bajarilmagan{% endif %}</span>
+                <p class="badge-pill badge-lgbadge bg-gradient-dark  text-white rounded p-4 ">
+                    {{ appeal.text }}
+                </p>
+            </div>
+                        {% if not appeal.status %}
+                            <a href="{% url 'appeals_change_done' pk=appeal.pk %}"
+                               class="btn btn-link bg-gradient-success text-white  ms-auto mx-4 border-0"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="bottom" title="Bajarildi">Bajarildi
+                                <i class="material-icons text-lg">done</i>
+                            </a>
+
+                {% endif %}
+            <hr class="dark horizontal my-0">
+            <div class="card-footer d-flex ">
+
+
+                <p class="font-weight-normal my-auto badge badge-pill badge-md bg-gradient-warning">{{ appeal.user }}</p>
+
+                <p class="text-sm ms-auto badge badge-pill badge-md bg-gradient-warning"> {{ appeal.open_date }}</p>
+            </div>
+        </div>
+
+
+    </main>
+
+    {% include 'settings.html' %}
+    <!--   Core JS Files   -->
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static 'assets/js/material-dashboard.min.js' %}"></script>
+    </body>
+{% endblock content %}

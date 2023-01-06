@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <script src="{% static '/js/html5-qrcode.min.js' %}"></script>
+
+    <body class="g-sidenav-show  bg-gray-200">
+    {% include "aside.html" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        {% include 'navbar.html' %}
+        <div class="container-fluid py-4">
+  <div class="row justify-content-md-center my-3">
+    <div class="col col-lg-3 p-3 bg-gradient-faded-success rounded text-white">
+      <span >Bazada <span class="badge bg-gradient-faded-white text-xxl-start" style="font-size: large">{{ bazada}}</span></span>
+    </div>
+    <div class="col-md-auto col-lg-5">
+    </div>
+    <div class="col col-lg-3 p-3 bg-gradient-faded-info rounded text-white">
+      <span>Tadbirda <span class="badge bg-gradient-faded-white text-xxl-start"style="font-size: large">{{ tadbirda}}</span></span>
+    </div></div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">Ratsiya haqidagi ma'lumotlar</h6>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            T/R
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Katalog
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Model
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qr code
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Tadbirda
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for waltalkie in waltalkies %}
+                                        <tr>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-success">{{ forloop.counter }}</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-success">{{ waltalkie.model_product.catalog }}</span>
+                                            </td>
+                                            <td class=" text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-info">{{ waltalkie.model_product }}</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-dark">{{ waltalkie.qr_code }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-sm bg-gradient-faded-info">{% if waltalkie.warehouse %}Omborda{% else %}<a href="{% url 'out_waltalkie' %}?eviews={{ waltalkie.event.last.pk }}"> Tadbirda</a>{% endif %}</span>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    {% include 'settings.html' %}
+    <!--   Core JS Files   -->
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static 'assets/js/material-dashboard.min.js' %}"></script>
+    </body>
+{% endblock content %}

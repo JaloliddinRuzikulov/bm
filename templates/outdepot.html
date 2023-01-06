@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <script src="{% static '/js/html5-qrcode.min.js' %}"></script>
+
+    <body class="g-sidenav-show  bg-gray-200">
+    {% include "aside.html" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        {% include 'navbar.html' %}
+        <div class="container-fluid py-4">
+
+            <div class="row">
+                <div class="col-md-{% if not reasons.closed %}7{% else %}12{% endif %} mt-4 ">
+                    <div class="card ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-uppercase ps-3">Chiqariladigan mahsulotlar ro'yhati</h6>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            T/R
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Katalog
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Model
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qr code
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Omborga kelgan vaqti
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for depot in depots %}
+                                        <tr>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-success">{{ forloop.counter }}</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-success">{{ depot.model.catalog }}</span>
+                                            </td>
+                                            <td class=" text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-info">{{ depot.model }}</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-faded-dark">{{ depot.qr_code }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-sm bg-gradient-faded-info">{{ depot.came_date|date:"d M Y" }}</span>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                    <a href="{% url 'out_depot' %}{{ reasons.pk }}/print" class="btn bg-gradient-info my-3 mx-lg-3"><i class="material-icons mx-1">print</i>Chop etish</a>
+                                   {% if not reasons.closed %} <a href="{% url 'out_depot' %}{{ reasons.pk }}/close" class="btn bg-gradient-danger my-3 "><i class="material-icons ">close</i>Yopish</a>{% endif %}
+                                </table>
+                                {% if not depots %}
+                                    <span class="badge d-flex justify-content-center m-3 pb-3 pt-3 mx-lg-3 text-center badge-pill badge-lg bg-gradient-danger">Ro'yhat bo'sh</span>{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{% if not reasons.closed %}
+                <div class="col-md-5 mt-4" id="qrcoder">
+                    <div class="card h-100 mb-4">
+                        <div class="card-header pb-0 px-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="mb-0 text-uppercase">QR kod bilan kiritish</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body pt-4 p-3">
+                            <div id="reader"></div>
+                            <form method="post" onsubmit="return false" name="dates">
+                                {% csrf_token %}
+
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label">QR kod kiritish maydoni</label>
+                                    <input type="text" class="form-control" onkeydown="handlerkeys()" id="addinput"
+                                           name="addinput">
+
+                                </div>
+
+                                <button class="btn btn-icon btn-primary btn-lg w-100 mt-3" type="submit"
+                                        onmousedown="submitons()">
+                                    <span class="btn-inner--icon"><i class="material-icons">add</i></span>
+                                    <span class="btn-inner--text">Ro'yhatga kiritish</span>
+                                </button>
+                                <hr class="bg-gradient-faded-primary">
+                                <div id="fields">
+                                </div>
+                                <input type="text" id="counts" name="counts" style="display:none;" value="1">
+
+                            </form>
+
+
+                            <script type="text/javascript">
+                                count = 0;
+                                qrcodelist = [];
+
+                                function addField() {
+                                    input = document.getElementById("addinput");
+                                    inputv = input.value
+                                    if ((inputv != "") && !(qrcodelist.includes(inputv))) {
+                                        count++;
+                                        input.value = "";
+                                        fields = document.getElementById("fields");
+                                        fields.insertAdjacentHTML("afterbegin", "" +
+                                            "<div id=\"clasis" + count + "\" class=\"input-group input-group-lg input-group-static mb-2\">" +
+                                            "<label  for=\"field" + count + "\">Seriya nomeri[" + count + "]:</label>" +
+                                            "<input type=\"text\" class=\"form-control\" id=\"field" + count + "\" name=\"field" + count + "\" value=\"" + inputv + "\">" +
+                                            "</div>");
+                                        qrcodelist.push(inputv);
+                                        document.getElementById('counts').value = count;
+                                    }
+
+                                }
+
+                                function submitons() {
+                                    if (document.getElementById("addinput").value == "") {
+                                        document.forms['dates'].onsubmit = ""
+                                        document.getElementById('saqlash').click()
+                                    }
+                                }
+
+                                function handlerkeys() {
+                                    if (event.key == "Enter") addField("");
+                                }
+
+                                function toggleqr() {
+                                    var detect = document.getElementById('qrcoder').style.display;
+                                    if (detect == '') {
+                                        document.getElementById('qrcoder').style.display = 'none';
+                                    } else document.getElementById('qrcoder').style.display = '';
+                                }
+
+                                function onScanSuccess(qrCodeMessage) {
+                                    document.getElementById('addinput').value = qrCodeMessage;
+                                    addField();
+                                    document.getElementById('addinput').value = "";
+
+
+                                }
+
+                                function onScanError(errorMessage) {
+                                    //handle scan error
+                                }
+
+                                var html5QrcodeScanner = new Html5QrcodeScanner(
+                                    "reader", {fps: 10, qrbox: 250});
+                                html5QrcodeScanner.render(onScanSuccess, onScanError);
+                            </script>
+                        </div>
+                    </div>
+                </div>{% endif %}
+            </div>
+        </div>
+
+        </div>
+    </main>
+
+    {% include 'settings.html' %}
+    <!--   Core JS Files   -->
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static 'assets/js/material-dashboard.min.js' %}"></script>
+    </body>
+{% endblock content %}

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <script src="{% static '/js/html5-qrcode.min.js' %}"></script>
+
+    <body class="g-sidenav-show  bg-gray-200">
+    {% include "aside.html" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        {% include 'navbar.html' %}
+        <div class="container">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn bg-gradient-primary my-3" data-bs-toggle="modal"
+                    data-bs-target="#outdepot">
+                Yangi tadbir yaratish
+            </button>
+
+            <div class="d-flex justify-content-between flex-column-reverse  flex-column mb-3">
+                {% for event in events %}
+                    <a href="{% url 'out_waltalkie' %}?eviews={{ event.id }}">
+                        <div class="btn card  m-1 bg-gradient-dark text-lg-start">
+                            <div class="card-body p-2">
+                                <p class="text-uppercase text-white  p-lg-1 form-label text-xxl-start">{{ event.name.name }}
+                                    <span
+                                            class="badge bg-gradient-info">  {{ event.pub_date }}</span>
+                                </p>      <span class=" badge bg-gradient-primary">{{ event.opener }} </span>
+
+                                <span class=" badge bg-gradient-faded-{% if event.closed %}primary{% else %}danger{% endif %}">{% if event.closed %}
+                                    Yopilgan{% else %}
+                                    Yopilmagan{% endif %}</span>
+                            </div>
+                        </div>
+
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if not events %}
+            <span class="badge d-flex justify-content-center m-3 pb-3 pt-3 mx-lg-3 text-center badge-pill badge-lg bg-gradient-danger">Ro'yhat bo'sh</span>{% endif %}
+
+        {#Modal#}
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="outdepot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-normal" id="exampleModalLabel">Tadbirni tanlang!</h5>
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form text-left" method="get" action="{% url 'out_waltalkie' %}">
+                            <div class="input-group input-group-outline my-3">
+                                <select class="form-control" name="event" placeholder="Sababni kiriting">
+                                    {% for name in ename %}
+                                    <option>{{ name}}</option>
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">
+                                    Yaratish
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'settings.html' %}
+    <!--   Core JS Files   -->
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static 'assets/js/material-dashboard.min.js' %}"></script>
+    </body>
+{% endblock content %}
