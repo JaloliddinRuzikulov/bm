@@ -20,9 +20,15 @@
                                     <span
                                             class="badge bg-gradient-info">  {{ appeal.open_date }}</span>
                                 </p>      <span class=" badge bg-gradient-primary">{{ appeal.user }} </span>
+                                {% url 'appeals_list' as appeals_list %}
+                                {% if  request.get_full_path == appeals_list %}
+                                    <span class=" badge bg-gradient-danger">
+                                    {% if appeal.status and appeal.status %}Bajarilgan{% endif %}
+                                        {% if appeal.status == False %}Bajarilmagan {% endif %}
+                                        {% if appeal.status == None %} Rad etilgan{% endif %}
+                                 </span>
+                                {% endif %}
 
-                                <span class=" badge bg-gradient-faded-{% if reason.closed %}primary{% else %}danger{% endif %}">{% if reason.closed %} Yopilgan{% else %}
-                                    Yopilmagan{% endif %}</span>
                             </div>
                         </div>
 
@@ -34,37 +40,39 @@
         {% if not appeals %}
             <span class="badge d-flex justify-content-center m-3 pb-3 pt-3 mx-lg-3 text-center badge-pill badge-lg bg-gradient-danger">Ro'yhat bo'sh</span>{% endif %}
 
-    {#Modal#}
+        {#Modal#}
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="outdepot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title font-weight-normal" id="exampleModalLabel">Sababni kiriting!</h5>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <!-- Modal -->
+        <div class="modal fade" id="outdepot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-normal" id="exampleModalLabel">Sababni kiriting!</h5>
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form text-left" method="get" action="{% url 'out_depot' %}">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Ombordan chiqarilish sababi:</label>
+                                <input type="text" name="reason" class="form-control" onfocus="focused(this)"
+                                       onfocusout="defocused(this)">
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">
+                                    Yaratish
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
-                <div class="modal-body">
-                    <form role="form text-left" method="get" action="{% url 'out_depot' %}">
-                        <div class="input-group input-group-outline my-3">
-                            <label class="form-label">Ombordan chiqarilish sababi:</label>
-                            <input type="text" name="reason" class="form-control" onfocus="focused(this)"
-                                   onfocusout="defocused(this)">
-                        </div>
-
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0" >Yaratish</button>
-                        </div>
-                    </form>
-                </div>
-
             </div>
         </div>
-    </div>
     </main>
 
     {% include 'settings.html' %}

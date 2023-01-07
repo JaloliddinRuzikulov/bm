@@ -52,6 +52,10 @@ class AppealsDetail(LoginRequiredMixin, DetailView):
     model = Appeal
     template_name = 'appeals/detail.html'
 
+    def post(self, *args, **kwargs):
+        description = self.request.POST['description']
+        Appeal.objects.filter(pk=kwargs['pk']).update(status=None, description = description)
+        return redirect('appeals_notdone')
 
 class AppealsChangeDone(LoginRequiredMixin, UpdateView):
     model = Appeal
@@ -60,3 +64,13 @@ class AppealsChangeDone(LoginRequiredMixin, UpdateView):
         pk = self.kwargs['pk']
         Appeal.objects.filter(pk=pk).update(status=True)
         return redirect('appeals_detail', pk=pk)
+
+
+class AppealsIgnore(LoginRequiredMixin, ListView):
+    model = Appeal
+    template_name = 'appeals/list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['appeals'] = Appeal.objects.filter(status=None)
+        return data

@@ -13,6 +13,12 @@ from .models import Depot, Catalog, ModelProduct, WalTalKie, Reason, Event, Even
 class Dashboard(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard.html'
 
+    def get(self, request, *args, **kwargs):
+        groups =self.request.user.groups.all()
+        if 'murojaatchi' in groups:
+            return redirect('appeals_list')
+        else:
+            return render(request, self.template_name)
 
 class ListDepot(LoginRequiredMixin, ListView):
     model = Depot

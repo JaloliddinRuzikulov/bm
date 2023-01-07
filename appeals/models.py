@@ -11,7 +11,7 @@ class Appeal(models.Model):
     description = models.CharField(max_length=1000, null=True, blank=True)
     open_date = models.DateTimeField(auto_now_add=True)
     close_date = models.DateTimeField(null=True, blank=True)
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.theme + " " + self.user.last_name
