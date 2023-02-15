@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'warehouse.apps.WarehouseConfig',
     'appeals.apps.AppealsConfig',
+    'waltalkio.apps.WaltalkioConfig',
 ]
 
 MIDDLEWARE = [
