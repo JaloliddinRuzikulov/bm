@@ -127,7 +127,7 @@ class WalTalKieView(LoginRequiredMixin, TemplateView):
             return self.render_to_response(context)
 
         context = dict()
-        context['events'] = Event.objects.all()
+        context['events'] =Event.objects.all()
         context['ename'] = EventName.objects.all()
         return render(request, 'event.html', context=context)
 
