@@ -49,6 +49,7 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Ombor</h6>
                 </li>
+
                 <li class="nav-item">
                     {% url 'add_walktalkio' as add_walktalkio %}
                     <a class="nav-link text-white {% if request.get_full_path == add_walktalkio %}active bg-gradient-primary{% endif %}"
@@ -60,26 +61,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    {% url 'out_depot' as out_depot %}
-                    <a class="nav-link text-white {% if out_depot in request.get_full_path %}active bg-gradient-primary{% endif %}"
-                       href="{{ out_depot }}">
+                    {% url 'walktalkio' as walktalkio %}
+                    <a class="nav-link text-white {% if walktalkio in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                       href="{{ walktalkio }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">sync_alt</i>
                         </div>
                         <span class="nav-link-text ms-1">Tovarlarni boshqarish</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    {% url 'list_depot' as list_depot %}
-                    <a class="nav-link text-white {% if request.get_full_path == list_depot %}active bg-gradient-primary{% endif %}"
-                       href="{{ list_depot }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">list</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tovarlar</span>
-                    </a>
-                </li>
-
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">IIV Ombori</h6>
                 </li>

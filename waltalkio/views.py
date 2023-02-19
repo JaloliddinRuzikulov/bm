@@ -17,3 +17,7 @@ class AddView(LoginRequiredMixin, TemplateView):
         for i in range(1, int(data['counts']) + 1):
             Depot.objects.get_or_create(model=model, qr_code=data["field" + str(i)], came_date=datetime.date.today())
         return redirect('add_depot')
+
+
+class WalkTalkIOView(LoginRequiredMixin, TemplateView):
+    template_name = 'walktalkio.html'
