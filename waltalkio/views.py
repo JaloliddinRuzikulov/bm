@@ -21,3 +21,13 @@ class AddView(LoginRequiredMixin, TemplateView):
 
 class WalkTalkIOView(LoginRequiredMixin, TemplateView):
     template_name = 'walktalkio.html'
+
+    def get(self, request, *args, **kwargs):
+        print(self.request.GET)
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        print(self.request.POST)
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
