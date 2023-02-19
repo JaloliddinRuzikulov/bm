@@ -1,25 +1,35 @@
+import datetime
+
 from django.db import models
 
 
+class Regions(models.Model):
+    region_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.region_name
+
+
+class Liable(models.Model):
+    full_name = models.CharField(max_length=250)
+    work = models.CharField(max_length=250)
+
+    class Meta:
+        ordering = ['full_name']
+
+    def __str__(self):
+        return self.full_name
+
+
 class WalkTalKie(models.Model):
+    region = models.ForeignKey(Regions, on_delete=models.CASCADE)
     model = models.CharField(max_length=255)
-    qr_code = models.CharField(max_length=255)
+    sr_code = models.CharField(max_length=255)
+    came_date = models.DateTimeField(auto_created=True)
+    Liable = models.ManyToManyField(Liable, blank=True)
 
+    class Meta:
+        ordering = ['sr_code']
 
-class Work(models.Model):
-    company_name = models.CharField(max_length=100)
-
-
-class Person(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    work = models.ForeignKey(Work, on_delete=models.CASCADE)
-
-
-class WalTalKIO(models.Model):
-    last = models.IntegerField
-    next = models.IntegerField
-    date = models.DateTimeField
-    walktalkie = models.ForeignKey(WalkTalKie, on_delete=models.CASCADE)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    work = models.ForeignKey(Work, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.sr_code
