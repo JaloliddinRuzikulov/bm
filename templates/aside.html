@@ -62,7 +62,7 @@
                 </li>
                 <li class="nav-item">
                     {% url 'walktalkio' as walktalkio %}
-                    <a class="nav-link text-white {% if walktalkio in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                    <a class="nav-link text-white {% if request.get_full_path == walktalkio %}active bg-gradient-primary{% endif %}"
                        href="{{ walktalkio }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">sync_alt</i>
