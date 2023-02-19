@@ -40,5 +40,4 @@ class WalkTalkIOView(LoginRequiredMixin, TemplateView):
         data = self.request.POST
         obj = WalkTalKie.objects.get(sr_code=data['sr_code'])
         obj.Liable.create(full_name=data['fish'], work=data['ishi'], created_date=datetime.datetime.now())
-        context = self.get_context_data(**kwargs)
         return redirect(self.request.get_full_path())
