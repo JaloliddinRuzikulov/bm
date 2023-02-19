@@ -13,6 +13,7 @@ class Regions(models.Model):
 class Liable(models.Model):
     full_name = models.CharField(max_length=250)
     work = models.CharField(max_length=250)
+    created_date = models.DateTimeField(auto_created=True)
 
     class Meta:
         ordering = ['full_name']
