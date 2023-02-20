@@ -30,7 +30,7 @@ class WalkTalkIOView(LoginRequiredMixin, TemplateView):
             try:
                 obj = WalkTalKie.objects.get(sr_code=sr_code)
                 context['searched'] = sr_code
-                context['liables'] = obj.Liable.all()
+                context['liables'] = obj.Liable.order_by('created_date')
             except:
                 context['searched'] = None;
 
