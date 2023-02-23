@@ -1,25 +1,142 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% load static %}                            <form method="post" class="text-start">
-                                {% csrf_token %}
-                                <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Username</label>
-                                    <input type="text" name="username" autofocus="" autocapitalize="none"
-                                           autocomplete="username" maxlength="150" required="" id="id_username"
-                                           class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
-                                </div>
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" id="id_password" name="password"
-                                           autocomplete="current-password" required=""
-                                           class="form-control" onfocus="focused(this)"
-                                           onfocusout="defocused(this)">
-                                </div>
+    {% load static %}
+    <script src="{% static '/js/html5-qrcode.min.js' %}"></script>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2">Sign in
+    {% include "aside.html" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        {% include 'navbar.html' %}
+        <div class="container-fluid py-4">
+
+            <div class="row ">
+                <div class="col-md-7 mt-4 ">
+                    <div class="card">
+                        <div class="card-header pb-0 px-3">
+                            <h6 class="mb-0">Ma'lumot kiritish</h6>
+                        </div>
+                        <div class="card-body pt-4 p-3">
+                            <form method="post" onsubmit="return false" name="dates">
+                                {% csrf_token %}
+                                <div id="fields">
+
+                                    <div class="input-group input-group-lg input-group-outline my-3"><label
+                                            class="form-label">Tuman </label><input type="text"
+                                                                                    class="form-control form-control-lg"
+                                                                                    id="tuman" name="tuman" required>
+                                    </div>
+                                    <div class="input-group input-group-lg input-group-outline my-3">
+                                        <label class="form-label">Model</label>
+                                        <input type="text" class="form-control form-control-lg" id="model" name="model"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="input-group input-group-sm input-group-outline my-2 ">
+
+                                        <input type="text" class="form-control form-control-lg rounded-0 flex-fill"
+                                               onkeydown="handlerkeys()"
+                                               id="addinput"
+                                               name="addinput">
+
+                                        {#                                    <a class="btn  qrimage ps-5 pe-6" type="button" "></a>#}
+
+                                    </div>
+                                    <button type="button" class="btn btn-primary my-2 rounded-0" onclick="toggleqr()">
+                                        <span class="btn-inner--icon"><i class="material-icons">filter_center_focus</i></span>
                                     </button>
                                 </div>
+                                <button class="btn btn-icon btn-primary btn-lg w-100 mt-3" type="submit"
+                                        onmousedown="submitons()">
+                                    <span class="btn-inner--icon"><i class="material-icons">save</i></span>
+                                    <span class="btn-inner--text">Saqlash</span>
+                                </button>
+                        </div>
+                        <input type="text" id="counts" name="counts" style="display:none;" value="1">
 
-                            </form>
+                    </div>
+
+                    </form>
+                </div>
+                <div class="col-md-5 mt-4" id="qrcoder">
+                    <div class="card h-100 mb-4">
+                        <div class="card-header pb-0 px-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="mb-0">QR Kod</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body pt-4 p-3">
+
+                            <div id="reader"></div>
+
+
+                            <script type="text/javascript">
+                                count = 0;
+                                qrcodelist = [];
+
+                                function addField() {
+                                    input = document.getElementById("addinput");
+                                    inputv = input.value
+                                    if ((inputv != "") && !(qrcodelist.includes(inputv))) {
+                                        count++;
+                                        input.value = "";
+                                        fields = document.getElementById("fields");
+                                        fields.insertAdjacentHTML("beforeend", "" +
+                                            "<div id=\"clasis" + count + "\" class=\"input-group input-group-lg input-group-static mb-2\">" +
+                                            "<label  for=\"field" + count + "\">Seriya nomeri[" + count + "]:</label>" +
+                                            "<input type=\"text\" class=\"form-control\" id=\"field" + count + "\" name=\"field" + count + "\" value=\"" + inputv + "\">" +
+                                            "</div>");
+                                        qrcodelist.push(inputv);
+                                        document.getElementById('counts').value = count;
+                                    }
+
+                                }
+
+                                function submitons() {
+                                    if (document.getElementById("addinput").value == "") {
+                                        document.forms['dates'].onsubmit = ""
+                                        document.getElementById('saqlash').click()
+                                    }
+                                }
+
+                                function handlerkeys() {
+                                    if (event.key == "Enter") addField("");
+                                }
+
+                                function toggleqr() {
+                                    var detect = document.getElementById('qrcoder').style.display;
+                                    if (detect == '') {
+                                        document.getElementById('qrcoder').style.display = 'none';
+                                    } else document.getElementById('qrcoder').style.display = '';
+                                }
+
+                                function onScanSuccess(qrCodeMessage) {
+                                    document.getElementById('addinput').value = qrCodeMessage;
+                                    addField();
+                                    document.getElementById('addinput').value = "";
+
+
+                                }
+
+                                function onScanError(errorMessage) {
+                                    //handle scan error
+                                }
+
+                                var html5QrcodeScanner = new Html5QrcodeScanner(
+                                    "reader", {fps: 10, qrbox: 250});
+                                html5QrcodeScanner.render(onScanSuccess, onScanError);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    {% include 'settings.html' %}
+
 {% endblock content %}
