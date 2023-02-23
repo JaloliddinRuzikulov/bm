@@ -3,7 +3,6 @@
     {% load static %}
     <script src="{% static '/js/html5-qrcode.min.js' %}"></script>
 
-    <body class="g-sidenav-show  bg-gray-200" >
     {% include "aside.html" %}
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -21,7 +20,11 @@
                                 {% csrf_token %}
                                 <div id="fields">
 
-                                    <div class="input-group input-group-lg input-group-outline my-3"><label class="form-label">Katalog</label><input type="text" class="form-control form-control-lg" id="katalog" name="katalog" required></div>
+                                    <div class="input-group input-group-lg input-group-outline my-3"><label
+                                            class="form-label">Katalog</label><input type="text"
+                                                                                     class="form-control form-control-lg"
+                                                                                     id="katalog" name="katalog"
+                                                                                     required></div>
                                     <div class="input-group input-group-lg input-group-outline my-3">
                                         <label class="form-label">Model</label>
                                         <input type="text" class="form-control form-control-lg" id="model" name="model"
@@ -111,9 +114,9 @@
                                 }
 
                                 function onScanSuccess(qrCodeMessage) {
-                                        document.getElementById('addinput').value = qrCodeMessage;
-                                        addField();
-                                        document.getElementById('addinput').value = "";
+                                    document.getElementById('addinput').value = qrCodeMessage;
+                                    addField();
+                                    document.getElementById('addinput').value = "";
 
 
                                 }
@@ -135,22 +138,5 @@
     </main>
 
     {% include 'settings.html' %}
-    <!--   Core JS Files   -->
-    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-
-
-
-    <script src="{% static 'assets/js/material-dashboard.min.js' %}"></script>
-    </body>
 {% endblock content %}
