@@ -21,9 +21,10 @@
                     </div>
                 </form>
             </div>
-            {% if searched == None %}   <div class="alert alert-danger text-white my-3" role="alert">
-      <strong>Topilmadi!</strong> Qidirilgan ratsiya topilmadi!
-  </div> {% endif %}
+            {% if searched == None %}
+                <div class="alert alert-danger text-white my-3" role="alert">
+                    <strong>Topilmadi!</strong> Qidirilgan ratsiya topilmadi!
+                </div> {% endif %}
             {% if searched %}
                 <div class="row">
 
@@ -93,37 +94,4 @@
             {% endif %}
     </main>
 
-
-    <!--   Core JS Files   -->
-    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
-
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-        var shaxs = document.getElementById('shaxs');
-        var details = document.getElementById('detials');
-        var btn1 = document.getElementById('btn1');
-
-        function toggle() {
-            if (shaxs.style.display == '') {
-                btn1.style.display = '';
-                details.className = 'col col-12';
-                shaxs.style.display = 'none';
-            } else {
-                btn1.style.display = 'none';
-                details.className = 'col col-6';
-                shaxs.style.display = '';
-            }
-        }
-    </script>
-
-
-    <script src="{% static 'assets/js/material-dashboard.min.js' %}"></script>
-    </body>
 {% endblock content %}
