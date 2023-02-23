@@ -14,14 +14,14 @@
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
     <!-- Nucleo Icons -->
-    <link href="../../static/assets/css/nucleo-icons.css" rel="stylesheet"/>
-    <link href="../../static/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/42d5adcbca.js' %}" crossorigin="anonymous"></script>
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="{% static 'assets/css/materialicons.css' %}" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="../../static/assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet"/>
+    <link id="pagestyle" href="{% static 'assets/css/material-dashboard.css' %}" rel="stylesheet"/>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -29,10 +29,10 @@
 {% block content %}
 {% endblock content %}
 <!--   Core JS Files   -->
-<script src="../../static/assets/js/core/popper.min.js"></script>
-<script src="../../static/assets/js/core/bootstrap.min.js"></script>
-<script src="../../static/assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../../static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -46,7 +46,7 @@
 <!-- Github buttons -->
 <script async defer src="{% static 'assets/js/buttons.js' %}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../../static/assets/js/material-dashboard.min.js?v=3.0.4"></script>
+<script src="/static/assets/js/material-dashboard.min.js?v=3.0.4"></script>
 </body>
 
 </html>
