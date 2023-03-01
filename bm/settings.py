@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'warehouse.apps.WarehouseConfig',
     'appeals.apps.AppealsConfig',
     'waltalkio.apps.WaltalkioConfig',
+    # 'twowayradio.apps.TwowayradioConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,4 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 # Login Logout Redirect
 
 LOGIN_REDIRECT_URL = 'dashboard'
-LOGOUT_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'

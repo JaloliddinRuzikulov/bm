@@ -47,30 +47,7 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Ombor</h6>
-                </li>
 
-                <li class="nav-item">
-                    {% url 'add_walktalkio' as add_walktalkio %}
-                    <a class="nav-link text-white {% if request.get_full_path == add_walktalkio %}active bg-gradient-primary{% endif %}"
-                       href="{{ add_walktalkio }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">add</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Omborga tovar kiritish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'walktalkio' as walktalkio %}
-                    <a class="nav-link text-white {% if request.get_full_path == walktalkio or  '/walktalkio/?addinput' in request.get_full_path    %}active bg-gradient-primary{% endif %}"
-                       href="{{ walktalkio }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">sync_alt</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tovarlarni boshqarish</span>
-                    </a>
-                </li>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">IIV Ombori</h6>
                 </li>
@@ -108,6 +85,28 @@
 
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Ratsiya</h6>
+                </li>
+
+
+                <li class="nav-item">
+                    {% url 'add_walktalkio' as add_walktalkio %}
+                    <a class="nav-link text-white {% if request.get_full_path == add_walktalkio %}active bg-gradient-primary{% endif %}"
+                       href="{{ add_walktalkio }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">add</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Omborga tovar kiritish</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% url 'walktalkio' as walktalkio %}
+                    <a class="nav-link text-white {% if request.get_full_path == walktalkio or  '/walktalkio/?addinput' in request.get_full_path    %}active bg-gradient-primary{% endif %}"
+                       href="{{ walktalkio }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">sync_alt</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Tovarlarni boshqarish</span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     {% url 'add_waltalkie' as add_waltalkie %}
