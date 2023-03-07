@@ -16,7 +16,7 @@
 
             <div class="d-flex justify-content-between flex-column-reverse  flex-column mb-3">
                 {% for event in events %}
-                    <a href="{% url 'out_waltalkie' %}?eviews={{ event.id }}">
+                    <a href="{% url 'lavent_twoway' %}?eviews={{ event.id }}">
                         <div class="btn card  m-1 bg-gradient-dark text-lg-start">
                             <div class="card-body p-2">
                                 <p class="text-uppercase text-white  p-lg-1 form-label text-xxl-start">{{ event.name.name }}
@@ -53,7 +53,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form role="form text-left" method="get" action="{% url 'out_waltalkie' %}">
+                        <form role="form text-left" method="get" action="{% url 'lavent_twoway' %}">
                             <div class="input-group input-group-outline my-3">
                                 <select class="form-control" name="event" placeholder="Sababni kiriting">
                                     {% for name in ename %}

@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'warehouse.apps.WarehouseConfig',
     'appeals.apps.AppealsConfig',
-    'waltalkio.apps.WaltalkioConfig',
-    # 'twowayradio.apps.TwowayradioConfig',
+    'twowayradio.apps.TwowayradioConfig',
 ]
 
 MIDDLEWARE = [

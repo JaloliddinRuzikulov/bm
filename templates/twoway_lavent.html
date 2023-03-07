@@ -14,7 +14,7 @@
                     <div class="card ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-uppercase ps-3">Chiqariladigan mahsulotlar ro'yhati</h6>
+                                <h6 class="text-white text-uppercase ps-3">Tadbirdagi ratsiyalar ro'yhati</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -25,9 +25,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             T/R
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Katalog
-                                        </th>
+
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Model
                                         </th>
@@ -41,19 +39,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for waltalkie in waltalkies %}
+                                    {% for waltalkie in twoways %}
                                         <tr>
                                             <td class="align-middle text-center text-sm">
                                                 <span class="badge badge-sm bg-gradient-faded-success">{{ forloop.counter }}</span>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm bg-gradient-faded-success">{{ waltalkie.model.catalog }}</span>
-                                            </td>
+
                                             <td class=" text-center text-sm">
                                                 <span class="badge badge-sm bg-gradient-faded-info">{{ waltalkie.model }}</span>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm bg-gradient-faded-dark">{{ waltalkie.qr_code }}</span>
+                                                <span class="p-2  btn-primary ml-2 mb-2 bg-gradient-faded-dark rounded-3">{{ waltalkie.sr_code }}</span>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <span class="badge badge-sm bg-gradient-faded-info">{{ waltalkie.came_date|date:"d M Y" }}</span>
@@ -63,14 +59,14 @@
                                     {% endfor %}
 
                                     </tbody>
-                                    <a href="{% url 'out_waltalkie' %}{{ events.pk }}/print"
+                                    <a href="{% url 'lavent_twoway' %}{{ events.pk }}/print"
                                        class="btn bg-gradient-info my-3 mx-lg-3"><i
                                             class="material-icons mx-1">print</i>Chop etish</a>
-                                    {% if not events.closed %}<a href="{% url 'out_waltalkie' %}{{ events.id }}/close"
+                                    {% if not events.closed %}<a href="{% url 'lavent_twoway' %}{{ events.id }}/close"
                                                                  class="btn bg-gradient-danger my-3 "><i
                                             class="material-icons ">close</i>Yopish</a>{% endif %}
                                 </table>
-                                {% if not waltalkies %}
+                                {% if not twoways %}
                                     <span class="badge d-flex justify-content-center m-3 pb-3 pt-3 mx-lg-3 text-center badge-pill badge-lg bg-gradient-danger">Ro'yhat bo'sh</span>{% endif %}
                             </div>
                         </div>

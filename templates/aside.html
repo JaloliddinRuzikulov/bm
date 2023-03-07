@@ -1,25 +1,25 @@
 {% load static %}
 <style>
-/* width */
-::-webkit-scrollbar {
-  width: 4px;
-}
+    /* width */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(0,0,0, 0.1);
-}
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
 
-/*   Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 90px;
-}
+    /*   Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 90px;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 </style>
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
@@ -49,7 +49,7 @@
                 </li>
 
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">IIV Ombori</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Ombor</h6>
                 </li>
                 <li class="nav-item">
                     {% url 'add_depot' as add_depot %}
@@ -88,40 +88,32 @@
                 </li>
 
 
+
+
                 <li class="nav-item">
-                    {% url 'add_walktalkio' as add_walktalkio %}
-                    <a class="nav-link text-white {% if request.get_full_path == add_walktalkio %}active bg-gradient-primary{% endif %}"
-                       href="{{ add_walktalkio }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">add</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Omborga tovar kiritish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'walktalkio' as walktalkio %}
-                    <a class="nav-link text-white {% if request.get_full_path == walktalkio or  '/walktalkio/?addinput' in request.get_full_path    %}active bg-gradient-primary{% endif %}"
-                       href="{{ walktalkio }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">sync_alt</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tovarlarni boshqarish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'add_waltalkie' as add_waltalkie %}
-                    <a class="nav-link text-white {% if request.get_full_path == add_waltalkie %}active bg-gradient-primary{% endif %}"
-                       href="{{ add_waltalkie }}">
+                    {% url 'add_twoway' as add_twoway %}
+                    <a class="nav-link text-white {% if request.get_full_path == add_twoway %}active bg-gradient-primary{% endif %}"
+                       href="{{ add_twoway }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">add_circle</i>
                         </div>
-                        <span class="nav-link-text ms-1">Ratsiya qo'shish</span>
+                        <span class="nav-link-text ms-1">Qo'shish</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    {% url 'out_waltalkie' as out_waltalkie %}
-                    <a class="nav-link text-white {% if out_waltalkie in request.get_full_path %}active bg-gradient-primary{% endif %}"
-                       href="{{ out_waltalkie }}">
+                    {% url 'manage_twoway' as manage_twoway %}
+                    <a class="nav-link text-white {% if request.get_full_path == manage_twoway or  '/manage_twoway/?addinput' in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                       href="{{ manage_twoway }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">sync_alt</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Boshqarish</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% url 'lavent_twoway' as lavent_twoway %}
+                    <a class="nav-link text-white {% if lavent_twoway in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                       href="{{ lavent_twoway }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">logout</i>
                         </div>
@@ -129,9 +121,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    {% url 'in_waltalkie' as in_waltalkie %}
-                    <a class="nav-link text-white {% if request.get_full_path == in_waltalkie %}active bg-gradient-primary{% endif %}"
-                       href="{{ in_waltalkie }}">
+                    {% url 'return_twoway' as return_twoway %}
+                    <a class="nav-link text-white {% if request.get_full_path == return_twoway %}active bg-gradient-primary{% endif %}"
+                       href="{{ return_twoway }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">first_page</i>
                         </div>
@@ -140,13 +132,13 @@
                 </li>
 
                 <li class="nav-item">
-                    {% url 'list_waltalkie' as list_waltalkie %}
-                    <a class="nav-link text-white {% if request.get_full_path == list_waltalkie %}active bg-gradient-primary{% endif %}"
-                       href="{{ list_waltalkie }}">
+                    {% url 'data_twoway' as data_twoway %}
+                    <a class="nav-link text-white {% if request.get_full_path == data_twoway %}active bg-gradient-primary{% endif %}"
+                       href="{{ data_twoway }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">info</i>
                         </div>
-                        <span class="nav-link-text ms-1">Ratsiya ma'lumotlari</span>
+                        <span class="nav-link-text ms-1">Ma'lumotlar</span>
                     </a>
                 </li>
 
@@ -174,7 +166,7 @@
                         <span class="nav-link-text ms-1">Bajarilgan</span>
                     </a>
                 </li>
-                                <li class="nav-item">
+                <li class="nav-item">
                     {% url 'appeals_ignore' as appeals_ignore %}
                     <a class="nav-link text-white {% if request.get_full_path == appeals_ignore %}active bg-gradient-primary{% endif %}"
                        href="{{ appeals_ignore }}">
@@ -216,16 +208,16 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Profil
                     sozlanmalari</h6>
             </li>
-{#            <li class="nav-item">#}
-{#                {% url 'profile' as profile %}#}
-{#                <a class="nav-link text-white {% if request.get_full_path == profile %}active bg-gradient-primary{% endif %}"#}
-{#                   href="{{ profile }}">#}
-{#                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">#}
-{#                        <i class="material-icons opacity-10">person</i>#}
-{#                    </div>#}
-{#                    <span class="nav-link-text ms-1">Profilga kirish</span>#}
-{#                </a>#}
-{#            </li>#}
+            {#            <li class="nav-item">#}
+            {#                {% url 'profile' as profile %}#}
+            {#                <a class="nav-link text-white {% if request.get_full_path == profile %}active bg-gradient-primary{% endif %}"#}
+            {#                   href="{{ profile }}">#}
+            {#                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">#}
+            {#                        <i class="material-icons opacity-10">person</i>#}
+            {#                    </div>#}
+            {#                    <span class="nav-link-text ms-1">Profilga kirish</span>#}
+            {#                </a>#}
+            {#            </li>#}
             <li class="nav-item">
                 <a class="nav-link text-white " href="{% url 'logout' %}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
