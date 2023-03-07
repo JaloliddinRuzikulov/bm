@@ -263,3 +263,4 @@ fabric.properties
 pdf
 db.sqlite3
 migrations
+staticfiles

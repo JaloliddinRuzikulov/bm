@@ -23,6 +23,9 @@ class WalkTalkIOView(LoginRequiredMixin, TemplateView):
     template_name = 'walktalkio.html'
 
     def get(self, request, *args, **kwargs):
+        obje = WalkTalKie.objects.filter(Liable=Liable.objects.get(pk=1))
+        print(obje)
+
         context = self.get_context_data(**kwargs)
         context['searched'] = False;
         if self.request.GET:
