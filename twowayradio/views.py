@@ -32,12 +32,12 @@ class ReturnView(LoginRequiredMixin, TemplateView):
         data = request.POST
         for i in range(1, int(data['counts']) + 1):
             try:
-                obj = TwoWay.objects.get(qr_code__contains=data["field" + str(i)])
+                obj = TwoWay.objects.get(sr_code=data["field" + str(i)])
                 obj.warehouse = True
                 obj.save()
             except:
                 continue
-        return redirect('in_waltalkie')
+        return redirect('return_twoway')
 
 
 class ManageView(LoginRequiredMixin, TemplateView):
@@ -48,21 +48,19 @@ class ManageView(LoginRequiredMixin, TemplateView):
         context['searched'] = False;
         if self.request.GET:
             sr_code = self.request.GET['search']
-            obj = TwoWay.objects.get(sr_code=sr_code)
             try:
-
-                # print(obj)
+                obj = TwoWay.objects.get(sr_code=sr_code)
                 context['searched'] = sr_code
-                context['liables'] = obj.Liable.order_by('created_date')
+                context['liables'] = obj.liable.order_by('created_date')
+                context['twoway'] = obj
             except:
                 context['searched'] = None;
-
         return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
         data = self.request.POST
         obj = TwoWay.objects.get(sr_code=data['sr_code'])
-        obj.Liable.create(full_name=data['fish'], work=data['ishi'], created_date=datetime.datetime.now())
+        obj.liable.create(full_name=data['fish'], description=data['ishi'], created_date=datetime.datetime.now())
         return redirect(self.request.get_full_path())
 
 
@@ -130,7 +128,7 @@ class LaventCloseView(LoginRequiredMixin, RedirectView):
         event = Event.objects.get(pk=self.kwargs['pk'])
         event.closed = True
         event.save()
-        return redirect(str(reverse('out_waltalkie') + '?eviews=' + str(event.id)))
+        return redirect(str(reverse('lavent_twoway') + '?eviews=' + str(event.id)))
 
 
 class DataView(LoginRequiredMixin, ListView):

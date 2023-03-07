@@ -48,7 +48,7 @@ class TwoWay(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     model = models.CharField(max_length=255)
     sr_code = models.CharField(max_length=255)
-    came_date = models.DateTimeField(auto_created=True)
+    came_date = models.DateTimeField(auto_now_add=True)
     warehouse = models.BooleanField(default=True)
     liable = models.ManyToManyField(Liable, blank=True)
     event = models.ManyToManyField(Event, blank=True)
