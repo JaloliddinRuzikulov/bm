@@ -1,7 +1,7 @@
 import datetime
 from django.db import models
-from accounts.models import CustomUser
 from django.urls import reverse
+from django.conf import settings
 
 
 class EventName(models.Model):
@@ -13,7 +13,7 @@ class EventName(models.Model):
 
 class Event(models.Model):
     name = models.ForeignKey(EventName, on_delete=models.CASCADE, null=True, blank=True, default=None)
-    opener = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    opener = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
     closed_date = models.DateTimeField(null=True, blank=True)
     closed = models.BooleanField(default=False)

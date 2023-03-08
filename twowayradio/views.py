@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, reverse
 from django.http import FileResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, RedirectView
-from .models import TwoWay, Region, Liable, EventName, Event
+from .models import TwoWay, Region, EventName, Event
+from accounts.models import CustomUser
 from twowayradio.appm.pdfgen import pdf_printer
 import datetime
 
@@ -141,8 +142,16 @@ class DataView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         data = super().get_context_data(**kwargs)
+        user = self.request.user
         cost_in = TwoWay.objects.filter(warehouse=True).count()
         cost_out = TwoWay.objects.filter(warehouse=False).count()
         data['cost_in'] = cost_in
         data['cost_out'] = cost_out
+        other = CustomUser.objects.get(pk = user.pk).region.region_name
+        if user.is_superuser:
+            data['options'] = Region.objects.all()
+            data['boolrole'] = CustomUser.objects.get(pk=user.pk).region.region_name
+
+        else:
+            data['options'] = Region.objects.all().filter(region_name=other)
         return data

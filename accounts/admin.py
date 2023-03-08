@@ -16,10 +16,11 @@ class CustomUserAdmin(UserAdmin):
         'username',
         'email',
         'phone_number',
+        'region',
         'is_staff',
     ]
-    fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('phone_number',), }),)
-    add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': {'phone_number',}, }),)
+    fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('phone_number','region',), }),)
+    add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': {'phone_number', 'region',}, }),)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

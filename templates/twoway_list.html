@@ -11,10 +11,10 @@
 
     {% include "aside.html" %}
 
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg " >
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         {% include 'navbar.html' %}
         <div class="container-fluid py-4">
-            <div class="row justify-content-md-center my-3">
+            <div class="row justify-content-md-center my-3" id="numerator">
                 <div class="col col-lg-3 p-3 bg-gradient-faded-success rounded text-white">
                     <span>Bazada <span class="badge bg-gradient-faded-white text-xxl-start"
                                        style="font-size: large">{{ cost_in }}</span></span>
@@ -26,8 +26,8 @@
                                          style="font-size: large">{{ cost_out }}</span></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
+            <div class="row justify-content-center" id="row">
+                <div class="col-12 " id="col">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 ">
@@ -36,10 +36,11 @@
                                     <h6 class="text-white text-capitalize float-start mx-4">Ratsiya haqidagi
                                         ma'lumotlar</h6>
                                     <div class="custom-select">
-                                        <select  class="rounded-2 float-end mx-4 bg-gradient-faded-success text-white border-success p-1"
+                                        <select class="rounded-2 float-end mx-4 bg-gradient-faded-success text-white border-success p-1"
                                                 id="tuman" onchange="myRegion()">
-                                            <option>Markaz</option>
-                                            <option>Koson tumani</option>
+                                            {% for option in options %}
+                                                <option>{{ option }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
@@ -101,23 +102,50 @@
 
     <script>
         function myRegion() {
-            var x = document.getElementById("tuman").value;
-            var filter, table, tr, td, i, txtValue;
+
+            var filter, table, tr, td, i, txtValue, numerator, x, n = 0, cost_in = 0, cost_out = 0, boolrole;
+            x = document.getElementById("tuman").value;
+            numerator = document.getElementById("numerator")
             filter = x.toUpperCase();
+            boolrole = "{{ boolrole }}".toUpperCase();
             table = document.getElementById('region');
             tr = table.getElementsByTagName("tr");
+            th = table.getElementsByTagName("th");
+            if (filter != boolrole) {
+                numerator.style.display = "none";
+                th[3].style.display = "none";
+                document.getElementById("row").className = "row justify-content-center";
+                document.getElementById("col").className = "col-6";
+            } else {
+                th[3].style.display = "";
+                document.getElementById("row").className = "row";
+                document.getElementById("col").className = "col-12";
+            }
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[4];
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        if (filter != boolrole) {
+                            tr[i].getElementsByTagName("td")[3].style.display = "none";
+                        }
+                        n++;
+                        tr[i].getElementsByTagName("td")[0].innerHTML = "<span class=\"badge badge-sm bg-gradient-faded-info\">" + n + "</span>";
                         tr[i].style.display = "";
+                        if (tr[i].getElementsByTagName("td")[3].innerText == "TADBIRDA") cost_out += 1; else cost_in += 1;
                     } else {
                         tr[i].style.display = "none";
                     }
                 }
             }
+            numerator.getElementsByTagName("span")[1].innerText = cost_in;
+            numerator.getElementsByTagName("span")[3].innerText = cost_out;
+            if (filter == boolrole) {
+                numerator.style.display = "";
+
+            }
         }
+
         myRegion()
     </script>
 
