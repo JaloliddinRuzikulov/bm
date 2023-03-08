@@ -13,7 +13,8 @@
                     <div class="d-flex ">
                         <div class="input-group input-group-sm input-group-outline my-2 ">
                             <label class="form-label">Seriyani kiriting..</label>
-                            <input type="text" class="form-control form-control-lg rounded-0 flex-fill" name="search">
+                            <input type="text" class="form-control form-control-lg rounded-0 flex-fill" name="search"
+                                   required>
                         </div>
                         <button type="submit" class="btn btn-primary my-2 rounded-0">
                             <span class="btn-inner--icon"><i class="material-icons">search</i></span>
@@ -43,31 +44,50 @@
                 <i class="material-icons text-success text-gradient text-6xl">man</i>
                 </span>
                                                 <div class="timeline-content">
-                                                    <h6 class="text-dark text-sm font-weight-bold mb-0">{{ liable.full_name }}
-                                                        - {{ liable.description }}</h6>
-                                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ liable.created_date }}</p>
+                                                    <h6 class="text-dark text-sm font-weight-bold mb-0">{{ liable.full_name }}</h6>
+                                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Telefon
+                                                        raqami: {{ liable.phone_number }}</p>
+                                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                        Guvohnoma raqami: {{ liable.document_number }}</p>
+                                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                        Qo'shimcha ma'lumot: {{ liable.description }}</p>
+                                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                        Topshirilgan muddati: {{ liable.created_date }}</p>
                                                 </div>
                                             </div>
                                         {% endfor %}
-                                        {% if liables.count == 0 %} Bosh {% endif %}
+
 
                                     </div>
+                                    {% if liables.count == 0 %}
+                                        <div class="alert alert-warning text-white" role="alert">
+      <span class="alert-icon align-middle">
+        <span class="material-icons text-md">
+        reorder
+        </span>
+      </span>
+                                            <span class="alert-text"><strong>Ro'yhat bo'sh</strong></span>
+                                        </div> {% endif %}
                                 </div>
-                                <div class="card-body p-3" style="border-left: #1f2b3e 1px solid ">
+                                <div class="card-body p-3 text-info" style="border-left: #1f2b3e 1px solid ">
                                     <div class="timeline timeline-one-side">
-{#                                        <div class="timeline-block mb-3">#}
-                                                    <span class="timeline-step">
+                                        {#                                        <div class="timeline-block mb-3">#}
+                                        <span class="timeline-step">
                 <i class="material-icons text-success text-gradient text-6xl">contacts</i>
                 </span>
-                                            <div class="timeline-content">
-                                                <h6 class="text-dark text-sm font-weight-bold mb-0"> Ratsiya haqida</h6>
-                                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Model: {{ twoway.model }} </p>
-                                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Shtrix kod: {{ twoway.sr_code }} </p>
-                                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Sanasi: {{ twoway.came_date }} </p>
-                                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Bo'limi: {{ twoway.region }} </p>
+                                        <div class="timeline-content">
+                                            <h6 class="text-dark text-sm font-weight-bold mb-0"> Ratsiya haqida</h6>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                Model: {{ twoway.model }} </p>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Shtrix
+                                                kod: {{ twoway.sr_code }} </p>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                Sanasi: {{ twoway.came_date }} </p>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                Bo'limi: {{ twoway.region }} </p>
 
-                                            </div>
-{#                                        </div>#}
+                                        </div>
+                                        {#                                        </div>#}
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +116,15 @@
                                         <input type="text" class="form-control" name="fish">
                                     </div>
                                     <div class="input-group input-group-outline mb-4">
-                                        <label class="form-label">Description</label>
+                                        <label class="form-label">Telefon raqami</label>
+                                        <input type="text" class="form-control" name="phone_number">
+                                    </div>
+                                    <div class="input-group input-group-outline mb-4">
+                                        <label class="form-label">Guvohnoma raqam</label>
+                                        <input type="text" class="form-control" name="document_number">
+                                    </div>
+                                    <div class="input-group input-group-outline mb-4">
+                                        <label class="form-label">Qo'shimcha ma'lumot</label>
                                         <input type="text" class="form-control" name="ishi">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-lg w-100 my-2">Shaxsni qo'shish

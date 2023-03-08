@@ -34,7 +34,9 @@ class Region(models.Model):
 
 class Liable(models.Model):
     full_name = models.CharField(max_length=250)
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, blank=True)
+    phone_number = models.CharField(max_length=60, blank=True)
+    document_number = models.CharField(max_length=250, blank=True)
     created_date = models.DateTimeField(auto_created=True)
 
     class Meta:

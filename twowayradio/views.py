@@ -60,7 +60,10 @@ class ManageView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         data = self.request.POST
         obj = TwoWay.objects.get(sr_code=data['sr_code'])
-        obj.liable.create(full_name=data['fish'], description=data['ishi'], created_date=datetime.datetime.now())
+        obj.liable.create(full_name=data['fish'], description=data['ishi'],
+                          phone_number=data['phone_number'],
+                          document_number=data['document_number'],
+                          created_date=datetime.datetime.now())
         return redirect(self.request.get_full_path())
 
 
