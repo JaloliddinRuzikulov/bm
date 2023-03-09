@@ -16,22 +16,24 @@ class AddView(LoginRequiredMixin, TemplateView):
         data = request.POST
         tuman, created_catalog = Region.objects.get_or_create(region_name=data['tuman'])
         for i in range(1, int(data['counts']) + 1):
-            try:
+            if self.request.user.is_staff:
                 TwoWay.objects.get_or_create(model=data['model'], region=tuman, number_code=data["special" + str(i)],
                                              sr_code=data["field" + str(i)],
                                              came_date=datetime.date.today())
-            except:
+            else:
                 TwoWay.objects.get_or_create(model=data['model'], region=tuman,
                                              sr_code=data["field" + str(i)],
                                              came_date=datetime.date.today())
-            else:
-                continue
+
         return redirect('add_twoway')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['regions'] = Region.objects.all()
-        if self.request.user.is_staff or self.request.user.is_active:
+        if self.request.user.is_superuser:
+            context['regions'] = Region.objects.all()
+        else:
+            context['regions'] = Region.objects.all().filter(region_name=CustomUser.objects.get(pk=self.request.user.pk).region.region_name)
+        if self.request.user.is_staff:
             context['special'] = True
         return context
 
