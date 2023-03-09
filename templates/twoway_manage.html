@@ -24,7 +24,7 @@
             </div>
             {% if searched == None %}
                 <div class="alert alert-danger text-white my-3" role="alert">
-                    <strong>Topilmadi!</strong> Qidirilgan ratsiya topilmadi!
+                    <strong>Topilmadi!</strong> Qidirilgan {{ section }} topilmadi!
                 </div> {% endif %}
             {% if searched %}
                 <div class="row">
@@ -76,7 +76,7 @@
                 <i class="material-icons text-success text-gradient text-6xl">contacts</i>
                 </span>
                                         <div class="timeline-content">
-                                            <h6 class="text-dark text-sm font-weight-bold mb-0"> Ratsiya haqida</h6>
+                                            <h6 class="text-dark text-sm font-weight-bold mb-0"> {{ section|title }} haqida</h6>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                                 Model: {{ twoway.model }} </p>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Shtrix

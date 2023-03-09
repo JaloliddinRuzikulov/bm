@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from accounts.models import CustomUser
-
+from django.conf import settings
 
 # Create your models here.
 class Catalog(models.Model):
@@ -21,7 +20,7 @@ class ModelProduct(models.Model):
 
 class Reason(models.Model):
     reason = models.CharField(max_length=100)
-    opener = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    opener = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     rea_date = models.DateTimeField(auto_now_add=True)
     closed = models.BooleanField(default=False)
 

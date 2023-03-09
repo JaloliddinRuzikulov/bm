@@ -2,7 +2,7 @@ import datetime
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-
+from accounts.models import Region
 
 class EventName(models.Model):
     name = models.CharField(max_length=250)
@@ -23,14 +23,6 @@ class Event(models.Model):
 
     def get_absolute_url(self):
         return reverse('events', args=[str(self.id)])
-
-
-class Region(models.Model):
-    region_name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.region_name
-
 
 class Liable(models.Model):
     full_name = models.CharField(max_length=250)

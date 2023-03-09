@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'warehouse.apps.WarehouseConfig',
     'appeals.apps.AppealsConfig',
+    'bodycam.apps.BodycamConfig',
+    'tablet.apps.TabletConfig',
     'twowayradio.apps.TwowayradioConfig',
 ]
 

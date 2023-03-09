@@ -35,175 +35,295 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            {% if  1 != request.user.groups.all.0.id %}
+            {% for group in request.user.groups.all %}
+                {% if 'dashboard' in group.name %}
+                    <li class="nav-item">
+                        {% url 'dashboard' as dashboard %}
+                        <a class="nav-link text-white {% if request.get_full_path == dashboard %}active bg-gradient-primary{% endif %}"
+                           href="{{ dashboard }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">dashboard</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Dashboard</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if 'ombor' in group.name %}
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Ombor</h6>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'add_depot' as add_depot %}
+                        <a class="nav-link text-white {% if request.get_full_path == add_depot %}active bg-gradient-primary{% endif %}"
+                           href="{{ add_depot }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">add</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Omborga tovar kiritish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'out_depot' as out_depot %}
+                        <a class="nav-link text-white {% if out_depot in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                           href="{{ out_depot }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">remove</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Ombordan tovar chiqarish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'list_depot' as list_depot %}
+                        <a class="nav-link text-white {% if request.get_full_path == list_depot %}active bg-gradient-primary{% endif %}"
+                           href="{{ list_depot }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">filter_none</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Ombordagi tovarlar</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if 'ratsiya' in group.name %}
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                            Ratsiya</h6>
+                    </li>
 
-                <li class="nav-item">
-                    {% url 'dashboard' as dashboard %}
-                    <a class="nav-link text-white {% if request.get_full_path == dashboard %}active bg-gradient-primary{% endif %}"
-                       href="{{ dashboard }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">dashboard</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        {% url 'add_twoway' as add_twoway %}
+                        <a class="nav-link text-white {% if request.get_full_path == add_twoway %}active bg-gradient-primary{% endif %}"
+                           href="{{ add_twoway }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">add_circle</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Qo'shish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'manage_twoway' as manage_twoway %}
+                        <a class="nav-link text-white {% if request.get_full_path == manage_twoway or  '/manage_twoway/?addinput' in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                           href="{{ manage_twoway }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">sync_alt</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Boshqarish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'lavent_twoway' as lavent_twoway %}
+                        <a class="nav-link text-white {% if lavent_twoway in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                           href="{{ lavent_twoway }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">logout</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Tadbirga chiqarish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'return_twoway' as return_twoway %}
+                        <a class="nav-link text-white {% if request.get_full_path == return_twoway %}active bg-gradient-primary{% endif %}"
+                           href="{{ return_twoway }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">first_page</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Bazaga qaytarish</span>
+                        </a>
+                    </li>
 
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Ombor</h6>
-                </li>
-                <li class="nav-item">
-                    {% url 'add_depot' as add_depot %}
-                    <a class="nav-link text-white {% if request.get_full_path == add_depot %}active bg-gradient-primary{% endif %}"
-                       href="{{ add_depot }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">add</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Omborga tovar kiritish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'out_depot' as out_depot %}
-                    <a class="nav-link text-white {% if out_depot in request.get_full_path %}active bg-gradient-primary{% endif %}"
-                       href="{{ out_depot }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">remove</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Ombordan tovar chiqarish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'list_depot' as list_depot %}
-                    <a class="nav-link text-white {% if request.get_full_path == list_depot %}active bg-gradient-primary{% endif %}"
-                       href="{{ list_depot }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">filter_none</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Ombordagi tovarlar</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        {% url 'data_twoway' as data_twoway %}
+                        <a class="nav-link text-white {% if request.get_full_path == data_twoway %}active bg-gradient-primary{% endif %}"
+                           href="{{ data_twoway }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">info</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Ma'lumotlar</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if 'bodycam' in group.name %}
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                            Body Camera</h6>
+                    </li>
+
+                    <li class="nav-item">
+                        {% url 'add_bodycam' as add_bodycam %}
+                        <a class="nav-link text-white {% if request.get_full_path == add_bodycam %}active bg-gradient-primary{% endif %}"
+                           href="{{ add_bodycam }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">add_circle</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Qo'shish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'manage_bodycam' as manage_bodycam %}
+                        <a class="nav-link text-white {% if request.get_full_path == manage_bodycam or  '/manage_bodycam/?addinput' in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                           href="{{ manage_bodycam }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">sync_alt</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Boshqarish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'lavent_bodycam' as lavent_bodycam %}
+                        <a class="nav-link text-white {% if lavent_bodycam in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                           href="{{ lavent_bodycam }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">logout</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Tadbirga chiqarish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'return_bodycam' as return_bodycam %}
+                        <a class="nav-link text-white {% if request.get_full_path == return_bodycam %}active bg-gradient-primary{% endif %}"
+                           href="{{ return_bodycam }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">first_page</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Bazaga qaytarish</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        {% url 'data_bodycam' as data_bodycam %}
+                        <a class="nav-link text-white {% if request.get_full_path == data_bodycam %}active bg-gradient-primary{% endif %}"
+                           href="{{ data_bodycam }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">info</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Ma'lumotlar</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if 'tablet' in group.name %}
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                            Planshet</h6>
+                    </li>
+
+                    <li class="nav-item">
+                        {% url 'add_tablet' as add_tablet %}
+                        <a class="nav-link text-white {% if request.get_full_path == add_tablet %}active bg-gradient-primary{% endif %}"
+                           href="{{ add_tablet }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">add_circle</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Qo'shish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'manage_tablet' as manage_tablet %}
+                        <a class="nav-link text-white {% if request.get_full_path == manage_tablet or  '/manage_tablet/?addinput' in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                           href="{{ manage_tablet }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">sync_alt</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Boshqarish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'lavent_tablet' as lavent_tablet %}
+                        <a class="nav-link text-white {% if lavent_tablet in request.get_full_path %}active bg-gradient-primary{% endif %}"
+                           href="{{ lavent_tablet }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">logout</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Tadbirga chiqarish</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'return_tablet' as return_tablet %}
+                        <a class="nav-link text-white {% if request.get_full_path == return_tablet %}active bg-gradient-primary{% endif %}"
+                           href="{{ return_tablet }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">first_page</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Bazaga qaytarish</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        {% url 'data_tablet' as data_tablet %}
+                        <a class="nav-link text-white {% if request.get_full_path == data_tablet %}active bg-gradient-primary{% endif %}"
+                           href="{{ data_tablet }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">info</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Ma'lumotlar</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if 'murojaatchi' in group.name %}
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                            Murojaatlar</h6>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'appeals_notdone' as appeals_notdone %}
+                        <a class="nav-link text-white {% if request.get_full_path == appeals_notdone %}active bg-gradient-primary{% endif %}"
+                           href="{{ appeals_notdone }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">mark_chat_unread</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Bajarilmagan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'appeals_done' as appeals_done %}
+                        <a class="nav-link text-white {% if request.get_full_path == appeals_done %}active bg-gradient-primary{% endif %}"
+                           href="{{ appeals_done }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">mark_email_read</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Bajarilgan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'appeals_ignore' as appeals_ignore %}
+                        <a class="nav-link text-white {% if request.get_full_path == appeals_ignore %}active bg-gradient-primary{% endif %}"
+                           href="{{ appeals_ignore }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">close</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Rad etilganlar</span>
+                        </a>
+                    </li>
+                {% endif %}
 
 
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Ratsiya</h6>
-                </li>
+                {% if 'murojaatlarim' in group.name %}
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                            Murojaatlar</h6>
+                    </li>
 
-
-
-
-                <li class="nav-item">
-                    {% url 'add_twoway' as add_twoway %}
-                    <a class="nav-link text-white {% if request.get_full_path == add_twoway %}active bg-gradient-primary{% endif %}"
-                       href="{{ add_twoway }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">add_circle</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Qo'shish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'manage_twoway' as manage_twoway %}
-                    <a class="nav-link text-white {% if request.get_full_path == manage_twoway or  '/manage_twoway/?addinput' in request.get_full_path %}active bg-gradient-primary{% endif %}"
-                       href="{{ manage_twoway }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">sync_alt</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Boshqarish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'lavent_twoway' as lavent_twoway %}
-                    <a class="nav-link text-white {% if lavent_twoway in request.get_full_path %}active bg-gradient-primary{% endif %}"
-                       href="{{ lavent_twoway }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">logout</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tadbirga chiqarish</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'return_twoway' as return_twoway %}
-                    <a class="nav-link text-white {% if request.get_full_path == return_twoway %}active bg-gradient-primary{% endif %}"
-                       href="{{ return_twoway }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">first_page</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Bazaga qaytarish</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    {% url 'data_twoway' as data_twoway %}
-                    <a class="nav-link text-white {% if request.get_full_path == data_twoway %}active bg-gradient-primary{% endif %}"
-                       href="{{ data_twoway }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">info</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Ma'lumotlar</span>
-                    </a>
-                </li>
-
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                        Murojaatlar</h6>
-                </li>
-                <li class="nav-item">
-                    {% url 'appeals_notdone' as appeals_notdone %}
-                    <a class="nav-link text-white {% if request.get_full_path == appeals_notdone %}active bg-gradient-primary{% endif %}"
-                       href="{{ appeals_notdone }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">mark_chat_unread</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Bajarilmagan</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'appeals_done' as appeals_done %}
-                    <a class="nav-link text-white {% if request.get_full_path == appeals_done %}active bg-gradient-primary{% endif %}"
-                       href="{{ appeals_done }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">mark_email_read</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Bajarilgan</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'appeals_ignore' as appeals_ignore %}
-                    <a class="nav-link text-white {% if request.get_full_path == appeals_ignore %}active bg-gradient-primary{% endif %}"
-                       href="{{ appeals_ignore }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">close</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Rad etilganlar</span>
-                    </a>
-                </li>
-            {% endif %}
-            {% if  1 == request.user.groups.all.0.id %}
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                        Murojaatlar</h6>
-                </li>
-
-                <li class="nav-item">
-                    {% url 'appeals_list' as appeals_list %}
-                    <a class="nav-link text-white {% if request.get_full_path == appeals_list %}active bg-gradient-primary{% endif %}"
-                       href="{{ appeals_list }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">menu_open</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Murojaatlarim</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'appeals_new' as appeals_new %}
-                    <a class="nav-link text-white {% if request.get_full_path == appeals_new %}active bg-gradient-primary{% endif %}"
-                       href="{{ appeals_new }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">add</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Yangi murojaat yaratish</span>
-                    </a>
-                </li>
-            {% endif %}
+                    <li class="nav-item">
+                        {% url 'appeals_list' as appeals_list %}
+                        <a class="nav-link text-white {% if request.get_full_path == appeals_list %}active bg-gradient-primary{% endif %}"
+                           href="{{ appeals_list }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">menu_open</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Murojaatlarim</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'appeals_new' as appeals_new %}
+                        <a class="nav-link text-white {% if request.get_full_path == appeals_new %}active bg-gradient-primary{% endif %}"
+                           href="{{ appeals_new }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">add</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Yangi murojaat yaratish</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Profil
                     sozlanmalari</h6>

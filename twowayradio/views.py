@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, reverse
 from django.http import FileResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, RedirectView
-from .models import TwoWay, Region, EventName, Event
-from accounts.models import CustomUser
+from .models import TwoWay, EventName, Event
+from accounts.models import CustomUser, Region
 from twowayradio.appm.pdfgen import pdf_printer
 import datetime
 
@@ -47,6 +47,7 @@ class ManageView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         context['searched'] = False;
+        context['section'] = 'ratsiya'
         if self.request.GET:
             sr_code = self.request.GET['search']
             try:
@@ -96,6 +97,7 @@ class LaventView(LoginRequiredMixin, TemplateView):
         data = super().get_context_data(**kwargs)
         data['twoways'] = TwoWay.objects.all().filter(event__id=self.eventid)
         data['events'] = Event.objects.get(pk=self.eventid)
+        data['section'] = 'ratsiya'
         return data
 
     def post(self, request):
@@ -138,20 +140,19 @@ class LaventCloseView(LoginRequiredMixin, RedirectView):
 class DataView(LoginRequiredMixin, ListView):
     model = TwoWay
     template_name = 'twoway_list.html'
-    context_object_name = 'twoways'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         data = super().get_context_data(**kwargs)
         user = self.request.user
-        cost_in = TwoWay.objects.filter(warehouse=True).count()
-        cost_out = TwoWay.objects.filter(warehouse=False).count()
-        data['cost_in'] = cost_in
-        data['cost_out'] = cost_out
         other = CustomUser.objects.get(pk = user.pk).region.region_name
+        data['section'] = 'Ratsiya'
         if user.is_superuser:
+            data['twoways'] = TwoWay.objects.all()
             data['options'] = Region.objects.all()
             data['boolrole'] = CustomUser.objects.get(pk=user.pk).region.region_name
 
         else:
+            region = Region.objects.get(region_name=other)
+            data['twoways'] = TwoWay.objects.all().filter(region=region)
             data['options'] = Region.objects.all().filter(region_name=other)
         return data

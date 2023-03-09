@@ -20,6 +20,8 @@ urlpatterns = [
     path('', include('warehouse.urls')),
     path('appeals/', include('appeals.urls')),
     path('twoway/', include('twowayradio.urls')),
+    path('bodycam/', include('bodycam.urls')),
+    path('tablet/', include('tablet.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
