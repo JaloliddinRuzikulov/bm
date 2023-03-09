@@ -23,6 +23,7 @@ class AddView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['regions'] = Region.objects.all()
+        context['special'] = True
         return context
 
 
@@ -117,7 +118,7 @@ class LaventView(LoginRequiredMixin, TemplateView):
 
 class LaventPrintView(LoginRequiredMixin, RedirectView):
     def get(self, request, *args, **kwargs):
-        data = [['T/r ', 'N_', 'Seriya nomer', 'Ism Familiya', 'Soxa xizmat', 'Tel nomer', 'Imzo', 'Qaytarildi']]
+        data = [['T/r ', 'Hos raqam', 'Seriya nomer', 'Ism Familiya', 'Soxa xizmat', 'Tel nomer', 'Imzo', 'Qaytarildi']]
         pk = self.kwargs['pk']
         event = Eventt.objects.get(pk=pk)
         objects = Tablet.objects.filter(event=event)

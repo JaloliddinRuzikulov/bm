@@ -23,6 +23,7 @@ class AddView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['regions'] = Region.objects.all()
+        context['special'] = True
         return context
 
 

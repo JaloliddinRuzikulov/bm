@@ -20,125 +20,142 @@
                                 {% csrf_token %}
                                 <div id="fields">
                                     <div class="d-flex">
-                                    <div class="input-group input-group-lg input-group-outline my-3 me-3">
-                                        <label for="tuman" class="form-label" >Bo'linmani
-                                            tanlang:</label>
-                                        <select class="form-control" id="tuman" name="tuman">
-                                            {% for region in regions %}
-                                                <option class="text-center text-lg">{{ region }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
+                                        <div class="input-group input-group-lg input-group-outline my-3 me-3">
+                                            <label for="tuman" class="form-label">Bo'linmani
+                                                tanlang:</label>
+                                            <select class="form-control" id="tuman" name="tuman">
+                                                {% for region in regions %}
+                                                    <option class="text-center text-lg">{{ region }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
 
-                                    <div class="input-group input-group-lg input-group-outline my-3">
-                                        <label class="form-label">Model</label>
-                                        <input type="text" class="form-control form-control-lg" id="model" name="model"
-                                               required>
+                                        <div class="input-group input-group-lg input-group-outline my-3">
+                                            <label class="form-label">Model</label>
+                                            <input type="text" class="form-control form-control-lg" id="model"
+                                                   name="model"
+                                                   required>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="d-flex">
+                                    <div class="input-group input-group-sm input-group-outline my-2">
+
+                                        <input type="text" class="form-control form-control-lg rounded-0 flex-fill"
+                                               onkeydown="handlerkeys()"
+                                               id="addinput"
+                                               placeholder="Shtrix kiritish maydoni"
+                                        >
+                                        {% if special %}
+                                            <input type="text" class="form-control-sm rounded-2"
+                                                   onkeydown="handlerkeys()"
+                                                   id="special"
+                                                   placeholder="Xos raqami"
+                                                   style="border: #ccc 1px solid"
+                                            >
+                                        {% endif %}
+                                    </div>
+                                    <button type="button" class="btn btn-primary my-2 rounded-0" onclick="toggleqr()">
+                                        <span class="btn-inner--icon"><i class="material-icons">filter_center_focus</i></span>
+                                    </button>
+                                </div>
+                                <button class="btn btn-icon btn-primary btn-lg w-100 mt-3" type="submit"
+                                        onmousedown="submitons()">
+                                    <span class="btn-inner--icon"><i class="material-icons">save</i></span>
+                                    <span class="btn-inner--text">Saqlash</span>
+                                </button>
                         </div>
-                        <div class="d-flex">
-                            <div class="input-group input-group-sm input-group-outline my-2 ">
+                        <input type="text" id="counts" name="counts" style="display:none;" value="1">
 
-                                <input type="text" class="form-control form-control-lg rounded-0 flex-fill"
-                                       onkeydown="handlerkeys()"
-                                       id="addinput"
-                                       >
+                    </div>
 
-                                {#                                    <a class="btn  qrimage ps-5 pe-6" type="button" "></a>#}
+                    </form>
+                </div>
+                <div class="col-md-5 mt-4" id="qrcoder">
+                    <div class="card h-100 mb-4">
+                        <div class="card-header pb-0 px-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="mb-0">QR Kod</h6>
+                                </div>
 
                             </div>
-                            <button type="button" class="btn btn-primary my-2 rounded-0" onclick="toggleqr()">
-                                <span class="btn-inner--icon"><i class="material-icons">filter_center_focus</i></span>
-                            </button>
                         </div>
-                        <button class="btn btn-icon btn-primary btn-lg w-100 mt-3" type="submit"
-                                onmousedown="submitons()">
-                            <span class="btn-inner--icon"><i class="material-icons">save</i></span>
-                            <span class="btn-inner--text">Saqlash</span>
-                        </button>
-                    </div>
-                    <input type="text" id="counts" name="counts" style="display:none;" value="1">
+                        <div class="card-body pt-4 p-3">
 
-                </div>
-
-                </form>
-            </div>
-            <div class="col-md-5 mt-4" id="qrcoder">
-                <div class="card h-100 mb-4">
-                    <div class="card-header pb-0 px-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6 class="mb-0">QR Kod</h6>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card-body pt-4 p-3">
-
-                        <div id="reader"></div>
+                            <div id="reader"></div>
 
 
-                        <script type="text/javascript">
-                            count = 0;
-                            qrcodelist = [];
+                            <script type="text/javascript">
+                                count = 0;
+                                qrcodelist = [];
 
-                            function addField() {
-                                input = document.getElementById("addinput");
-                                inputv = input.value
-                                if ((inputv != "") && !(qrcodelist.includes(inputv))) {
-                                    count++;
-                                    input.value = "";
-                                    fields = document.getElementById("fields");
-                                    fields.insertAdjacentHTML("beforeend", "" +
-                                        "<div id=\"clasis" + count + "\" class=\"input-group input-group-lg input-group-static mb-2\">" +
-                                        "<label  for=\"field" + count + "\">Seriya nomeri[" + count + "]:</label>" +
-                                        "<input type=\"text\" class=\"form-control\" id=\"field" + count + "\" name=\"field" + count + "\" value=\"" + inputv + "\">" +
-                                        "</div>");
-                                    qrcodelist.push(inputv);
-                                    document.getElementById('counts').value = count;
+                                function addField() {
+                                    input = document.getElementById("addinput");
+                                    inputv = input.value
+                                    {% if special %}
+                                        special = document.getElementById("special").value;
+                                    {% endif %}
+
+                                    if ((inputv != "") && !(qrcodelist.includes(inputv))) {
+                                        count++;
+                                        input.value = "";
+                                        fields = document.getElementById("fields");
+                                        fields.insertAdjacentHTML("beforeend", "" +
+                                            "<div class=\"d-flex\">" +
+                                            "<div id=\"clasis" + count + "\" class=\"input-group input-group-sm input-group-outline my-2 is-filled\">" +
+                                            "<label class=\"my-2 mx-1\" for=\"field" + count + "\">Seriya nomeri[" + count + "]:</label>" +
+                                            "<input type=\"text\" class=\"form-control flex-fill\" id=\"field" + count + "\" name=\"field" + count + "\" value=\"" + inputv + "\">" +
+                                            {% if special %}
+                                                "<input type=\"text\" style=\"border: #ccc 1px solid\" class=\"form-control-sm rounded-2\" id=\"special"
+                                                + count + "\" name=\"field" + count + "\" value=\"" + special
+                                                + "\" placeholder=\"Xos raqam\">" +
+                                            {% endif %}
+                                            "</div></div>");
+                                        qrcodelist.push(inputv);
+                                        document.getElementById('counts').value = count;
+                                        document.getElementById("special").value = "";
+                                    }
                                 }
 
-                            }
-
-                            function submitons() {
-                                if (document.getElementById("addinput").value == "") {
-                                    document.forms['dates'].onsubmit = ""
-                                    document.getElementById('saqlash').click()
+                                function submitons() {
+                                    if (document.getElementById("addinput").value == "") {
+                                        document.forms['dates'].onsubmit = ""
+                                        document.getElementById('saqlash').click()
+                                    }
                                 }
-                            }
 
-                            function handlerkeys() {
-                                if (event.key == "Enter") addField("");
-                            }
+                                function handlerkeys() {
+                                    if (event.key == "Enter") addField("");
+                                }
 
-                            function toggleqr() {
-                                var detect = document.getElementById('qrcoder').style.display;
-                                if (detect == '') {
-                                    document.getElementById('qrcoder').style.display = 'none';
-                                } else document.getElementById('qrcoder').style.display = '';
-                            }
+                                function toggleqr() {
+                                    var detect = document.getElementById('qrcoder').style.display;
+                                    if (detect == '') {
+                                        document.getElementById('qrcoder').style.display = 'none';
+                                    } else document.getElementById('qrcoder').style.display = '';
+                                }
 
-                            function onScanSuccess(qrCodeMessage) {
-                                document.getElementById('addinput').value = qrCodeMessage;
-                                addField();
-                                document.getElementById('addinput').value = "";
+                                function onScanSuccess(qrCodeMessage) {
+                                    document.getElementById('addinput').value = qrCodeMessage;
+                                    addField();
 
+                                    document.getElementById('addinput').value = "";
 
-                            }
+                                }
 
-                            function onScanError(errorMessage) {
-                                //handle scan error
-                            }
+                                function onScanError(errorMessage) {
+                                    //handle scan error
+                                }
 
-                            var html5QrcodeScanner = new Html5QrcodeScanner(
-                                "reader", {fps: 10, qrbox: 250});
-                            html5QrcodeScanner.render(onScanSuccess, onScanError);
-                        </script>
+                                var html5QrcodeScanner = new Html5QrcodeScanner(
+                                    "reader", {fps: 10, qrbox: 250});
+                                html5QrcodeScanner.render(onScanSuccess, onScanError);
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         </div>
     </main>

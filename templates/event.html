@@ -13,24 +13,35 @@
                     data-bs-target="#outdepot">
                 Yangi tadbir yaratish
             </button>
-
+            {% url 'lavent_tablet' as lavent_tablet %}
+            {% url 'lavent_bodycam' as lavent_bodycam %}
+            {% url 'lavent_twoway' as lavent_twoway %}
             <div class="d-flex justify-content-between flex-column-reverse  flex-column mb-3">
                 {% for event in events %}
-                    <a href="{% url 'lavent_twoway' %}?eviews={{ event.id }}">
-                        <div class="btn card  m-1 bg-gradient-dark text-lg-start">
-                            <div class="card-body p-2">
-                                <p class="text-uppercase text-white  p-lg-1 form-label text-xxl-start">{{ event.name.name }}
-                                    <span
-                                            class="badge bg-gradient-info">  {{ event.pub_date }}</span>
-                                </p>      <span class=" badge bg-gradient-primary">{{ event.opener }} </span>
 
-                                <span class=" badge bg-gradient-faded-{% if event.closed %}primary{% else %}danger{% endif %}">{% if event.closed %}
-                                    Yopilgan{% else %}
-                                    Yopilmagan{% endif %}</span>
-                            </div>
-                        </div>
+                    {% if request.get_full_path == lavent_twoway %}
+                        <a href="{% url 'lavent_twoway' %}?eviews={{ event.id }}">
+                    {% endif %}
+                    {% if request.get_full_path == lavent_bodycam %}
+                        <a href="{{ lavent_bodycam }}?eviews={{ event.id }}">
+                    {% endif %}
+                    {% if request.get_full_path == lavent_tablet %}
+                        <a href="{{ lavent_tablet }}?eviews={{ event.id }}">
+                    {% endif %}
+                <div class="btn card  m-1 bg-gradient-dark text-lg-start">
+                    <div class="card-body p-2">
+                        <p class="text-uppercase text-white  p-lg-1 form-label text-xxl-start">{{ event.name.name }}
+                            <span
+                                    class="badge bg-gradient-info">  {{ event.pub_date }}</span>
+                        </p>      <span class=" badge bg-gradient-primary">{{ event.opener }} </span>
 
-                    </a>
+                        <span class=" badge bg-gradient-faded-{% if event.closed %}primary{% else %}danger{% endif %}">{% if event.closed %}
+                            Yopilgan{% else %}
+                            Yopilmagan{% endif %}</span>
+                    </div>
+                </div>
+
+                </a>
                 {% endfor %}
             </div>
         </div>
@@ -53,11 +64,20 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form role="form text-left" method="get" action="{% url 'lavent_twoway' %}">
+                        <form role="form text-left" method="get" action="
+                    {% if request.get_full_path == lavent_twoway %}
+                       {{ lavent_twoway }}
+                    {% endif %}
+                    {% if request.get_full_path == lavent_bodycam %}
+                       {{ lavent_bodycam }}
+                    {% endif %}
+                    {% if request.get_full_path == lavent_tablet %}
+                       {{ lavent_tablet }}
+                    {% endif %}">
                             <div class="input-group input-group-outline my-3">
                                 <select class="form-control" name="event" placeholder="Sababni kiriting">
                                     {% for name in ename %}
-                                    <option>{{ name}}</option>
+                                        <option>{{ name }}</option>
                                     {% endfor %}
                                 </select>
 

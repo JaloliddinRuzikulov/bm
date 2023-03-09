@@ -16,13 +16,23 @@ class AddView(LoginRequiredMixin, TemplateView):
         data = request.POST
         tuman, created_catalog = Region.objects.get_or_create(region_name=data['tuman'])
         for i in range(1, int(data['counts']) + 1):
-            TwoWay.objects.get_or_create(model=data['model'], region=tuman, sr_code=data["field" + str(i)],
-                                         came_date=datetime.date.today())
+            try:
+                TwoWay.objects.get_or_create(model=data['model'], region=tuman, number_code=data["special" + str(i)],
+                                             sr_code=data["field" + str(i)],
+                                             came_date=datetime.date.today())
+            except:
+                TwoWay.objects.get_or_create(model=data['model'], region=tuman,
+                                             sr_code=data["field" + str(i)],
+                                             came_date=datetime.date.today())
+            else:
+                continue
         return redirect('add_twoway')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['regions'] = Region.objects.all()
+        if self.request.user.is_staff or self.request.user.is_active:
+            context['special'] = True
         return context
 
 
@@ -144,7 +154,7 @@ class DataView(LoginRequiredMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         data = super().get_context_data(**kwargs)
         user = self.request.user
-        other = CustomUser.objects.get(pk = user.pk).region.region_name
+        other = CustomUser.objects.get(pk=user.pk).region.region_name
         data['section'] = 'Ratsiya'
         if user.is_superuser:
             data['twoways'] = TwoWay.objects.all()
