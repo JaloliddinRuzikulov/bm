@@ -16,7 +16,8 @@ class AddView(LoginRequiredMixin, TemplateView):
         data = request.POST
         tuman, created_catalog = Region.objects.get_or_create(region_name=data['tuman'])
         for i in range(1, int(data['counts']) + 1):
-            Tablet.objects.get_or_create(model=data['model'], region=tuman, sr_code=data["field" + str(i)],
+            Tablet.objects.get_or_create(model=data['model'], region=tuman, number_code=data["special" + str(i)],
+                                         sr_code=data["field" + str(i)],
                                          came_date=datetime.date.today())
         return redirect('add_tablet')
 
@@ -145,7 +146,7 @@ class DataView(LoginRequiredMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         data = super().get_context_data(**kwargs)
         user = self.request.user
-        other = CustomUser.objects.get(pk = user.pk).region.region_name
+        other = CustomUser.objects.get(pk=user.pk).region.region_name
         data['section'] = 'Planshet'
         if user.is_superuser:
             data['twoways'] = Tablet.objects.all()
