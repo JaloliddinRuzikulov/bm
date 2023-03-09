@@ -76,11 +76,16 @@
                 <i class="material-icons text-success text-gradient text-6xl">contacts</i>
                 </span>
                                         <div class="timeline-content">
-                                            <h6 class="text-dark text-sm font-weight-bold mb-0"> {{ section|title }} haqida</h6>
+                                            <h6 class="text-dark text-sm font-weight-bold mb-0"> {{ section|title }}
+                                                haqida</h6>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                                 Model: {{ twoway.model }} </p>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Shtrix
                                                 kod: {{ twoway.sr_code }} </p>
+{#                                            {% if twoway.number_code.empty %}#}
+                                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Xos raqami
+                                                    kod: {{ twoway.number_code }} </p>
+{#                                            {% endif %}#}
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                                 Sanasi: {{ twoway.came_date }} </p>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
