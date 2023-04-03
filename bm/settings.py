@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'bodycam.apps.BodycamConfig',
     'tablet.apps.TabletConfig',
     'twowayradio.apps.TwowayradioConfig',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+INTERNAL_IPS = [
+'127.0.0.1',
 ]
 
 ROOT_URLCONF = 'bm.urls'

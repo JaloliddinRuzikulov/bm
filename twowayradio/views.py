@@ -44,12 +44,12 @@ class ReturnView(LoginRequiredMixin, TemplateView):
     def post(self, request):
         data = request.POST
         for i in range(1, int(data['counts']) + 1):
-            try:
-                obj = TwoWay.objects.get(sr_code=data["field" + str(i)])
-                obj.warehouse = True
-                obj.save()
-            except:
-                continue
+            TwoWay.objects.filter(sr_code__exact=data["field" + str(i)]).update(warehouse=True)
+            # try:
+            #     # obj.warehouse = True
+            #     # obj.save()
+            # except:
+            #     continue
         return redirect('return_twoway')
 
 
