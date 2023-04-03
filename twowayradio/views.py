@@ -136,7 +136,7 @@ class LaventPrintView(LoginRequiredMixin, RedirectView):
         objects = TwoWay.objects.filter(event=event)
         count = 1
         for obj in objects:
-            data.append([count, obj.number_code, obj.qr_code])
+            data.append([count, obj.number_code, obj.sr_code])
             count += 1
         directory = pdf_printer(data, id='waltalkie' + str(pk))
         return FileResponse(open(directory, 'rb'), as_attachment=False, filename='IIV_' + str(pk) + '.pdf')
