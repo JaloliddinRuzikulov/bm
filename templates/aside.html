@@ -167,26 +167,6 @@
                             <span class="nav-link-text ms-1">Boshqarish</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        {% url 'lavent_bodycam' as lavent_bodycam %}
-                        <a class="nav-link text-white {% if lavent_bodycam in request.get_full_path %}active bg-gradient-primary{% endif %}"
-                           href="{{ lavent_bodycam }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">logout</i>
-                            </div>
-                            <span class="nav-link-text ms-1">Tadbirga chiqarish</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        {% url 'return_bodycam' as return_bodycam %}
-                        <a class="nav-link text-white {% if request.get_full_path == return_bodycam %}active bg-gradient-primary{% endif %}"
-                           href="{{ return_bodycam }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">first_page</i>
-                            </div>
-                            <span class="nav-link-text ms-1">Bazaga qaytarish</span>
-                        </a>
-                    </li>
 
                     <li class="nav-item">
                         {% url 'data_bodycam' as data_bodycam %}
@@ -224,26 +204,6 @@
                                 <i class="material-icons opacity-10">sync_alt</i>
                             </div>
                             <span class="nav-link-text ms-1">Boshqarish</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        {% url 'lavent_tablet' as lavent_tablet %}
-                        <a class="nav-link text-white {% if lavent_tablet in request.get_full_path %}active bg-gradient-primary{% endif %}"
-                           href="{{ lavent_tablet }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">logout</i>
-                            </div>
-                            <span class="nav-link-text ms-1">Tadbirga chiqarish</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        {% url 'return_tablet' as return_tablet %}
-                        <a class="nav-link text-white {% if request.get_full_path == return_tablet %}active bg-gradient-primary{% endif %}"
-                           href="{{ return_tablet }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">first_page</i>
-                            </div>
-                            <span class="nav-link-text ms-1">Bazaga qaytarish</span>
                         </a>
                     </li>
 

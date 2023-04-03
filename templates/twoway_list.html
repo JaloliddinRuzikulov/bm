@@ -62,6 +62,12 @@
                                             Qr code
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            F.I.SH
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qo'shimcha ma'lumot
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Tadbirda
                                         </th>
 
@@ -79,6 +85,12 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <span class="p-2  btn-primary ml-2 mb-2 bg-gradient-faded-dark rounded-3">{{ twoway.sr_code }}</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="p-2  btn-primary ml-2 mb-2 bg-gradient-faded-dark rounded-3">{{ twoway.liable.all.first.full_name }}</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="p-2  btn-primary ml-2 mb-2 bg-gradient-faded-dark rounded-3">{{ twoway.liable.all.first.description }}</span>
                                             </td>
 
                                             <td class="align-middle text-center">
@@ -113,26 +125,26 @@
             th = table.getElementsByTagName("th");
             if (filter != boolrole) {
                 numerator.style.display = "none";
-                th[3].style.display = "none";
+                th[5].style.display = "none";
                 document.getElementById("row").className = "row justify-content-center";
                 document.getElementById("col").className = "col-6";
             } else {
-                th[3].style.display = "";
+                th[5].style.display = "";
                 document.getElementById("row").className = "row";
                 document.getElementById("col").className = "col-12";
             }
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[4];
+                td = tr[i].getElementsByTagName("td")[6];
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         if (filter != boolrole) {
-                            tr[i].getElementsByTagName("td")[3].style.display = "none";
+                            tr[i].getElementsByTagName("td")[5].style.display = "none";
                         }
                         n++;
                         tr[i].getElementsByTagName("td")[0].innerHTML = "<span class=\"badge badge-sm bg-gradient-faded-info\">" + n + "</span>";
                         tr[i].style.display = "";
-                        if (tr[i].getElementsByTagName("td")[3].innerText == "TADBIRDA") cost_out += 1; else cost_in += 1;
+                        if (tr[i].getElementsByTagName("td")[5].innerText == "TADBIRDA") cost_out += 1; else cost_in += 1;
                     } else {
                         tr[i].style.display = "none";
                     }

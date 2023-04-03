@@ -17,7 +17,8 @@ class AddView(LoginRequiredMixin, TemplateView):
         tuman, created_catalog = Region.objects.get_or_create(region_name=data['tuman'])
         for i in range(1, int(data['counts']) + 1):
             if self.request.user.is_staff:
-                TwoWay.objects.get_or_create(model=data['model'], region=tuman, number_code=data["special" + str(i)],
+                TwoWay.objects.get_or_create(model=data['model'], region=tuman, 
+					     number_code=data["special" + str(i)],
                                              sr_code=data["field" + str(i)],
                                              came_date=datetime.date.today())
             else:
@@ -135,7 +136,7 @@ class LaventPrintView(LoginRequiredMixin, RedirectView):
         objects = TwoWay.objects.filter(event=event)
         count = 1
         for obj in objects:
-            data.append([count, obj.number_code, obj.qr_code])
+            data.append([count, obj.number_code, obj.sr_code])
             count += 1
         directory = pdf_printer(data, id='waltalkie' + str(pk))
         return FileResponse(open(directory, 'rb'), as_attachment=False, filename='IIV_' + str(pk) + '.pdf')
