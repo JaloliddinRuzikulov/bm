@@ -169,3 +169,4 @@ class DataView(LoginRequiredMixin, ListView):
             data['twoways'] = TwoWay.objects.all().filter(region=region)
             data['options'] = Region.objects.all().filter(region_name=other)
         return data
+    

@@ -53,3 +53,4 @@ class TwoWay(models.Model):
 
     def __str__(self):
         return self.sr_code
+    
