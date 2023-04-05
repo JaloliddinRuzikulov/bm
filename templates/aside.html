@@ -35,7 +35,8 @@
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="  w-auto " id="sidenav-collapse-main">
-        <ul class="navbar-nav" id="accordion">
+        <ul class="navbar-nav">
+            <div id="accordion">
             {% for group in request.user.groups.all %}
                 {% if 'dashboard' in group.name %}
                     <li class="nav-item">
@@ -50,7 +51,7 @@
                     </li>
                 {% endif %}
                 
-
+                    
                 {% if 'ombor' in group.name %}
                     <li class="nav-item mt-3">
                         <h6><a class= 'ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8' data-bs-toggle="collapse" href="#ombor">Ombor </a></h6>
@@ -299,7 +300,9 @@
                     </li>
                 </div>
                 {% endif %}
+           
             {% endfor %}
+        </div>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Profil
                     sozlanmalari</h6>

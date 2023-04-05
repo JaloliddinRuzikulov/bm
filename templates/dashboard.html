@@ -80,27 +80,34 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row mt-4">
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                                
                                 <div class="chart">
                                     <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="card-body">
-                            <h6 class="mb-0 ">Bajarilmagan murojaatlar soni</h6>
-                            <p class="text-sm ">Bir yillikdagi barcha bajarilmagan murojaatlar sonining oylik kesimidagi statistikasi</p>
+                            <h6 class="mb-0 ">Rad etilgan murojaatlar soni</h6>
+                            <p class="text-sm ">Bir yillikdagi barcha rad etilgan murojaatlar sonining oylik kesimidagi statistikasi</p>
                             <hr class="dark horizontal">
-                            <div class="d-flex ">
-                                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm"> Hozirgi holatda </p>
+
+                            <div class="alert alert-dark text-white" role="alert">
+                                <span class="alert-icon"><i class="ni ni-fat-remove "></i></span>
+                                <strong>Bo'linmasi</strong> Murojaat sarlavhasi 
+                                <span class="badge bg-gradient-primary">Secondary</span>
                             </div>
+
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -114,10 +121,13 @@
                             <h6 class="mb-0 "> Bajarilgan murojaatlar soni</h6>
                              <p class="text-sm "> Bir yillikdagi barcha bajarilgan murojaatlar sonining oylik kesimidagi statistikasi</p> 
                             <hr class="dark horizontal">
-                            <div class="d-flex ">
-                                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm"> Hozirgi holatda </p>
+
+                            <div class="alert alert-primary text-white" role="alert">
+                                <span class="alert-icon"><i class="ni ni-check-bold "></i></span>
+                                <strong>Bo'linmasi</strong> Murojaat sarlavhasi 
+                                <span class="badge bg-gradient-success">Secondary</span>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -134,14 +144,124 @@
                             <h6 class="mb-0 ">Murojaatlarning umumiy statistikasi</h6>
                             <p class="text-sm ">Bir yillikdagi barcha murojaatlar soni</p>
                             <hr class="dark horizontal">
-                            <div class="d-flex ">
-                                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm">Hozirgi holatda</p>
+
+                            <div class="alert alert-primary text-white" role="alert">
+                                <span class="alert-icon"><i class="ni ni-fat-add"></i></span>
+                                <strong>Bo'linmasi</strong> Murojaat sarlavhasi 
+                                <span class="badge bg-gradient-dark">Secondary</span>
+
                             </div>
+                              
+
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row mt-1">
+
+
+                <!-- Pie chart twoway -->
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                    <h6 class="mb-0">Ratsiya</h6>
+                    <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
+                    <i class="fas fa-info" aria-hidden="true"></i>
+                    </button>
+                    </div>
+                    </div>
+                    <div class="card-body pb-0 p-3 mt-4">
+                    <div class="row">
+                    <div class="text-start">
+                    <div class="chart">
+                    <canvas id="twoway_chart" class="chart-canvas" height="200" width="500" style="display: block; box-sizing: border-box; height: 200px; width: 269.8px;"></canvas>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="card-footer pt-5 pb-0 p-3 d-flex align-items-center">
+                    <div class="w-60">
+                    <p class="text-sm">
+                    More than <b>1,200,000</b> sales are made using referral marketing, and <b>700,000</b> are from social media.
+                    </p>
+                    </div>
+                    <div class="w-40 text-end">
+                    <a class="btn bg-light mb-0 text-end" data-bs-toggle="collapse" href="#ratsiya">Ko'rish</a>
+                    </div>
+                    </div>
+                    </div>
+                     </div>
+                   <!-- Pie chart twoway -->
+                <!-- Pie chart twoway -->
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                    <h6 class="mb-0">Planshet</h6>
+                    <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
+                    <i class="fas fa-info" aria-hidden="true"></i>
+                    </button>
+                    </div>
+                    </div>
+                    <div class="card-body pb-0 p-3 mt-4">
+                    <div class="row">
+                    <div class="text-start">
+                    <div class="chart">
+                    <canvas id="tablet_chart" class="chart-canvas" height="200" width="500" style="display: block; box-sizing: border-box; height: 200px; width: 269.8px;"></canvas>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="card-footer pt-5 pb-0 p-3 d-flex align-items-center">
+                    <div class="w-60">
+                    <p class="text-sm">
+                    More than <b>1,200,000</b> sales are made using referral marketing, and <b>700,000</b> are from social media.
+                    </p>
+                    </div>
+                    <div class="w-40 text-end">
+                    <a class="btn bg-light mb-0 text-end" data-bs-toggle="collapse" href="#tablet">Ko'rish</a>
+                    </div>
+                    </div>
+                    </div>
+                     </div>
+                   <!-- Pie chart twoway -->
+
+                <!-- Pie chart twoway -->
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                    <h6 class="mb-0">Body camera</h6>
+                    <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
+                    <i class="fas fa-info" aria-hidden="true"></i>
+                    </button>
+                    </div>
+                    </div>
+                    <div class="card-body pb-0 p-3 mt-4">
+                    <div class="row">
+                    <div class="text-start">
+                    <div class="chart">
+                    <canvas id="bodycam_chart" class="chart-canvas" height="200" width="500" style="display: block; box-sizing: border-box; height: 200px; width: 269.8px;"></canvas>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="card-footer pt-5 pb-0 p-3 d-flex align-items-center">
+                    <div class="w-60">
+                    <p class="text-sm">
+                    More than <b>1,200,000</b> sales are made using referral marketing, and <b>700,000</b> are from social media.
+                    </p>
+                    </div>
+                    <div class="w-40 text-end">
+                    <a class="btn bg-light mb-0 text-end" data-bs-toggle="collapse" href="#bodycam">Ko'rish</a>
+                    </div>
+                    </div>
+                    </div>
+                     </div>
+                   <!-- Pie chart twoway -->
+            </div>
+
             <div class="row mb-4">
                 <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
                     <div class="card">
@@ -256,20 +376,27 @@
     <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js'%}"></script>
     <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>
     <script>
+        var dynamicColors = function() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+        };
+
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
         new Chart(ctx, {
             type: "bar",
             data: {
-                labels: ["M", "T", "W", "T", "F", "S", "S"],
+                labels: ["Yan", "Fev", "Mar", "Apr", "May", "Iyun", "Iyul", "Avg", "Sent", "Okt", "Noy", "Dek"],
                 datasets: [{
-                    label: "Sales",
+                    label: "Rad etilganlar",
                     tension: 0.4,
                     borderWidth: 0,
                     borderRadius: 4,
                     borderSkipped: false,
                     backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40],
+                    data: [50, 20, 10, 22, 50, 10, 40, 30, 20, 50, 30, 40],
                     maxBarThickness: 6
                 },],
             },
@@ -342,15 +469,16 @@
         new Chart(ctx2, {
             type: "bar",
             data: {
-                labels: ["M", "T", "W", "T", "F", "S", "S"],
+                labels: ["Yan", "Fev", "Mar", "Apr", "May", "Iyun", "Iyul", "Avg", "Sent", "Okt", "Noy", "Dek"],
+                
                 datasets: [{
-                    label: "Sales",
+                    label: "Bajarilganlar",
                     tension: 0.4,
                     borderWidth: 0,
                     borderRadius: 4,
                     borderSkipped: false,
                     backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40],
+                    data: [50, 20, 10, 22, 50, 10, 40, 90, 21, 10, 50, 20],
                     maxBarThickness: 6
                 },],
             },
@@ -422,9 +550,9 @@
         new Chart(ctx3, {
             type: "line",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["Yan", "Fev", "Mar", "Apr", "May", "Iyun", "Iyul", "Avg", "Sent", "Okt", "Noy", "Dek"],
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "Bajarilmaganlar",
                     tension: 0,
                     borderWidth: 0,
                     pointRadius: 5,
@@ -434,7 +562,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500, 100, 200, 50],
                     maxBarThickness: 6
 
                 }],
@@ -498,5 +626,187 @@
                 },
             },
         });
+
+        // Pie chart twoway_chart
+        var twoway_chart = document.getElementById("twoway_chart").getContext("2d");
+        new Chart(twoway_chart, {
+        type: "pie",
+        data: {
+        labels: ['twoway_chart', 'Direct', 'Organic', 'Referral'],
+        datasets: [{
+            label: "Projects",
+            weight: 9,
+            cutout: 0,
+            tension: 0.9,
+            pointRadius: 2,
+            borderWidth: 2,
+            backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
+            data: [15, 20, 12, 60],
+            fill: false
+        }],
+        },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+            position: 'right',
+            horizontalAlign: 'left',
+            offsetY: 40,
+            display: true,
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
+        scales: {
+            y: {
+            grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+            },
+            ticks: {
+                display: false
+            }
+            },
+            x: {
+            grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+            },
+            ticks: {
+                display: false,
+            }
+            },
+        },
+        },
+     });
+
+    // Pie chart bodycam_chart
+    var bodycam_chart = document.getElementById("bodycam_chart").getContext("2d");
+        new Chart(bodycam_chart, {
+            type: "pie",
+            data: {
+            labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
+            datasets: [{
+                label: "Projects",
+                weight: 9,
+                cutout: 0,
+                tension: 0.9,
+                pointRadius: 2,
+                borderWidth: 2,
+                backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
+                data: [15, 20, 12, 60],
+                fill: false
+            }],
+            },
+            options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                position: 'right',
+                horizontalAlign: 'left',
+                offsetY: 40,
+                display: true,
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index',
+            },
+            scales: {
+                y: {
+                grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                },
+                ticks: {
+                    display: false
+                }
+                },
+                x: {
+                grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                },
+                ticks: {
+                    display: false,
+                }
+                },
+            },
+            },
+        });
+        // Pie chart tablet_chart
+        var tablet_chart = document.getElementById("tablet_chart").getContext("2d");
+        new Chart(tablet_chart, {
+            type: "pie",
+            data: {
+                labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
+                datasets: [{
+                label: "Projects",
+                weight: 9,
+                cutout: 0,
+                tension: 0.9,
+                pointRadius: 2,
+                borderWidth: 2,
+                backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
+                data: [15, 20, 12, 60],
+                fill: false
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                legend: {
+                    position: 'right',
+                    horizontalAlign: 'left',
+                    offsetY: 40,
+                    display: true,
+                }
+                },
+                interaction: {
+                intersect: false,
+                mode: 'index',
+                },
+                scales: {
+                y: {
+                    grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    },
+                    ticks: {
+                    display: false
+                    }
+                },
+                x: {
+                    grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    },
+                    ticks: {
+                    display: false,
+                    }
+                },
+                },
+            },
+            });
+
+
+
     </script>
 {% endblock content %}
