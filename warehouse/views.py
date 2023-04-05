@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from twowayradio.appm.pdfgen import pdf_printer
 from .models import Depot, Catalog, ModelProduct, Reason
 
-
 # Create your views here.
 
 
@@ -15,6 +14,7 @@ class Dashboard(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         groups =self.request.user.groups.all()
+
         if 'murojaatchi' in groups:
             return redirect('appeals_list')
         else:

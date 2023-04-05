@@ -14,7 +14,7 @@
                                 <i class="material-icons opacity-10">weekend</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                                <p class="text-sm mb-0 text-capitalize">Ombordagi mahsulotlar soni</p>
                                 <h4 class="mb-0">$53k</h4>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                                 <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Today's Users</p>
+                                <p class="text-sm mb-0 text-capitalize">Ratsiyalar soni</p>
                                 <h4 class="mb-0">2,300</h4>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                 <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">New Clients</p>
+                                <p class="text-sm mb-0 text-capitalize">Planshetlar soni</p>
                                 <h4 class="mb-0">3,462</h4>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                 <i class="material-icons opacity-10">weekend</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Sales</p>
+                                <p class="text-sm mb-0 text-capitalize">Body cameralar soni</p>
                                 <h4 class="mb-0">$103,430</h4>
                             </div>
                         </div>
@@ -91,12 +91,12 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 ">Website Views</h6>
+                            <h6 class="mb-0 ">Bajarilmagan murojaatlar soni</h6>
                             <p class="text-sm ">Last Campaign Performance</p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                                <p class="mb-0 text-sm"> Hozirgi holatda </p>
                             </div>
                         </div>
                     </div>
@@ -111,13 +111,13 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 "> Daily Sales </h6>
+                            <h6 class="mb-0 "> Bajarilgan murojaatlar soni</h6>
                             <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales.
                             </p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm"> updated 4 min ago </p>
+                                <p class="mb-0 text-sm"> Hozirgi holatda </p>
                             </div>
                         </div>
                     </div>
@@ -132,12 +132,12 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 ">Completed Tasks</h6>
-                            <p class="text-sm ">Last Campaign Performance</p>
+                            <h6 class="mb-0 ">Murojaatlarning umumiy soni</h6>
+                            <p class="text-sm ">Oylik kesimida murojaatlar soni</p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm">just updated</p>
+                                <p class="mb-0 text-sm">Hozirgi holatda</p>
                             </div>
                         </div>
                     </div>
@@ -149,29 +149,13 @@
                         <div class="card-header pb-0">
                             <div class="row">
                                 <div class="col-lg-6 col-7">
-                                    <h6>Projects</h6>
+                                    <h6>So'ngi tadbirlar</h6>
                                     <p class="text-sm mb-0">
                                         <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                        <span class="font-weight-bold ms-1">30 done</span> this month
+                                        <span class="font-weight-bold ms-1">Oylik</span> 
                                     </p>
                                 </div>
-                                <div class="col-lg-6 col-5 my-auto text-end">
-                                    <div class="dropdown float-lg-end pe-4">
-                                        <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                           aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v text-secondary"></i>
-                                        </a>
-                                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
-                                            aria-labelledby="dropdownTable">
-                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                            </li>
-                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                action</a></li>
-                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                                else here</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -478,7 +462,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card h-100">
                         <div class="card-header pb-0">
-                            <h6>Orders overview</h6>
+                            <h6>So'ngi harakatlar</h6>
                             <p class="text-sm">
                                 <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                 <span class="font-weight-bold">24%</span> this month
@@ -644,25 +628,19 @@
         var ctx2 = document.getElementById("chart-line").getContext("2d");
 
         new Chart(ctx2, {
-            type: "line",
+            type: "bar",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["M", "T", "W", "T", "F", "S", "S"],
                 datasets: [{
-                    label: "Mobile apps",
-                    tension: 0,
+                    label: "Sales",
+                    tension: 0.4,
                     borderWidth: 0,
-                    pointRadius: 5,
-                    pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                    pointBorderColor: "transparent",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderWidth: 4,
-                    backgroundColor: "transparent",
-                    fill: true,
-                    data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+                    borderRadius: 4,
+                    borderSkipped: false,
+                    backgroundColor: "rgba(255, 255, 255, .8)",
+                    data: [50, 20, 10, 22, 50, 10, 40],
                     maxBarThickness: 6
-
-                }],
+                },],
             },
             options: {
                 responsive: true,
@@ -687,8 +665,9 @@
                             color: 'rgba(255, 255, 255, .2)'
                         },
                         ticks: {
-                            display: true,
-                            color: '#f8f9fa',
+                            suggestedMin: 0,
+                            suggestedMax: 500,
+                            beginAtZero: true,
                             padding: 10,
                             font: {
                                 size: 14,
@@ -697,15 +676,17 @@
                                 style: 'normal',
                                 lineHeight: 2
                             },
-                        }
+                            color: "#fff"
+                        },
                     },
                     x: {
                         grid: {
                             drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
+                            display: true,
+                            drawOnChartArea: true,
                             drawTicks: false,
-                            borderDash: [5, 5]
+                            borderDash: [5, 5],
+                            color: 'rgba(255, 255, 255, .2)'
                         },
                         ticks: {
                             display: true,
