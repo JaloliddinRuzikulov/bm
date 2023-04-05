@@ -55,7 +55,7 @@
                     <li class="nav-item mt-3">
                         <h6><a class= 'ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8' data-bs-toggle="collapse" href="#ombor">Ombor </a></h6>
                     </li>
-                    <div id="ombor" class="collapse" data-bs-parent="#accordion">
+                    <div id="ombor" class="collapse {% if 'depot' in request.get_full_path %}show{%endif%}" data-bs-parent="#accordion">
                     <li class="nav-item">
                         {% url 'add_depot' as add_depot %}
                         <a class="nav-link text-white {% if request.get_full_path == add_depot %}active bg-gradient-primary{% endif %}"
@@ -93,7 +93,7 @@
                             <h6><a class= 'ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8' data-bs-toggle="collapse" href="#ratsiya">Ratsiya </a></h6>
 
                     </li>
-                    <div id="ratsiya" class="collapse" data-bs-parent="#accordion">
+                    <div id="ratsiya" class="collapse{% if 'twoway' in request.get_full_path %}show{%endif%}" data-bs-parent="#accordion">
 
                     <li class="nav-item">
                         {% url 'add_twoway' as add_twoway %}
@@ -153,7 +153,7 @@
                         <h6><a class= 'ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8' data-bs-toggle="collapse" href="#bodycam">Body Camera </a></h6>
 
                     </li>
-                    <div id="bodycam" class="collapse" data-bs-parent="#accordion">
+                    <div id="bodycam" class="collapse {% if 'bodycam' in request.get_full_path %}show{%endif%}" data-bs-parent="#accordion">
 
                     <li class="nav-item">
                         {% url 'add_bodycam' as add_bodycam %}
@@ -194,7 +194,7 @@
                         <h6><a class= 'ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8' data-bs-toggle="collapse" href="#tablet">Planshet </a></h6>
 
                     </li>
-                    <div id="tablet" class="collapse" data-bs-parent="#accordion">
+                    <div id="tablet" class="collapse {% if 'tablet' in request.get_full_path %}show{%endif%}" data-bs-parent="#accordion">
 
                     <li class="nav-item">
                         {% url 'add_tablet' as add_tablet %}
@@ -234,7 +234,7 @@
                         <h6><a class= 'ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8' data-bs-toggle="collapse" href="#appeals">Murojaatlar </a></h6>
 
                     </li>
-                    <div id="appeals" class="collapse" data-bs-parent="#accordion">
+                    <div id="appeals" class="collapse {% if 'appeals' in request.get_full_path %}show{%endif%}" data-bs-parent="#accordion">
 
                     <li class="nav-item">
                         {% url 'appeals_notdone' as appeals_notdone %}
@@ -275,7 +275,7 @@
                         <h6><a class= 'ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8' data-bs-toggle="collapse" href="#appeals_us">Murojaatlar </a></h6>
 
                     </li>
-                    <div id="appeals_us" class="collapse" data-bs-parent="#accordion">
+                    <div id="appeals_us" class="collapse {% if 'appeals' in request.get_full_path %}show{%endif%}" data-bs-parent="#accordion">
 
                     <li class="nav-item">
                         {% url 'appeals_list' as appeals_list %}
