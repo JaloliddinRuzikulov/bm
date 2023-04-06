@@ -9,6 +9,7 @@ from twowayradio.models import TwoWay
 from tablet.models import Tablet
 from bodycam.models import BodyCam
 from appeals.models import Appeal
+from django.db.models import Count
 # Create your views here.    
 class Dashboard(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard.html'
@@ -19,8 +20,47 @@ class Dashboard(LoginRequiredMixin, TemplateView):
         context["twoway"] = TwoWay.objects.all().count() 
         context["tablet"] = Tablet.objects.all().count() 
         context["bodycam"] = BodyCam.objects.all().count() 
-        context['status_rejects'] = Appeal.objects.filter(status=None).count()
-        print(context['status_rejects'])
+
+        months_notdone = list()
+        months_done = list()
+        months_rejects = list()
+        year = datetime.datetime.now().year
+        for month in range(1, 13):        
+            start_date = datetime.datetime(year, month, 1)
+            end_date = datetime.datetime(year, month+1, 1) if month != 12 else datetime.datetime(year+1, 1, 1)
+            months_done.append(Appeal.objects.filter(open_date__gte=start_date, open_date__lte=end_date, status=True).aggregate(Count('id'))['id__count'])
+            months_notdone.append(Appeal.objects.filter(open_date__gte=start_date, open_date__lte=end_date, status=False).aggregate(Count('id'))['id__count'])
+            months_rejects.append(Appeal.objects.filter(open_date__gte=start_date, open_date__lte=end_date, status=None).aggregate(Count('id'))['id__count'])
+        context['status_notdone'] = str(months_notdone)
+        context['status_rejects'] = str(months_rejects)
+        context['status_done'] = str(months_done)
+        context['list_done'] = Appeal.objects.filter(status=True).order_by('-open_date')[:5]
+        context['list_notdone'] = Appeal.objects.filter(status=False).order_by('-open_date')[:5]
+        context['list_rejects'] = Appeal.objects.filter(status=None).order_by('-open_date')[:5]
+        twoway_labels = list()
+        twoway_data = list()
+        for twoway in TwoWay.objects.all():
+            twoway_labels.append(twoway.region.region_name)
+        for twoway in twoway_labels:    
+            twoway_data.append(TwoWay.objects.filter(region__region_name__exact=twoway).count())        
+        context['twoway_labels'] = str(list(set(twoway_labels)))
+        context['twoway_data'] = str(list(set(twoway_data)))
+        tablet_labels = list()
+        tablet_data = list()
+        for tablet in Tablet.objects.all():
+            tablet_labels.append(tablet.region.region_name)
+        for tablet in tablet_labels:    
+            tablet_data.append(Tablet.objects.filter(region__region_name__exact=tablet).count())
+        context['tablet_labels'] = str(list(set(tablet_labels)))
+        context['tablet_data'] = str(list(set(tablet_data)))
+        bodycam_labels = list()
+        bodycam_data = list()
+        for bodycam in BodyCam.objects.all():
+            bodycam_labels.append(bodycam.region.region_name)
+        for bodycam in bodycam_labels:    
+            bodycam_data.append(BodyCam.objects.filter(region__region_name__exact=bodycam).count())
+        context['bodycam_labels'] = str(list(set(bodycam_labels)))
+        context['bodycam_data'] = str(list(set(bodycam_data)))
         groups =self.request.user.groups.all()
 
         if 'murojaatchi' in groups:

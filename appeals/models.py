@@ -15,5 +15,8 @@ class Appeal(models.Model):
     def __str__(self):
         return self.theme + " " + self.user.last_name
 
+    def get_absolute(self):
+        return reverse('appeals_detail', kwargs={'pk': self.pk})
+
     def get_absolute_url(self):
         return reverse('appeals_list')

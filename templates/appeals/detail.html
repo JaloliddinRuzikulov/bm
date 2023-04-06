@@ -29,7 +29,7 @@
             </div>
             <div class="flex ms-auto">
 
-                {% if appeal.status != None and not appeal.status and 1 != request.user.groups.all.0.id%}
+                {% if appeal.status != None and not appeal.status %}
                     <a href="{% url 'appeals_change_done' pk=appeal.pk %}"
                        class="btn btn-link bg-gradient-success text-white  ms-auto mx-4 border-0">Bajarildi
                         <i class="material-icons text-lg">done</i>

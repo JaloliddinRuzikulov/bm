@@ -101,13 +101,17 @@
                             <p class="text-sm ">Bir yillikdagi barcha rad etilgan murojaatlar sonining oylik kesimidagi
                                 statistikasi</p>
                             <hr class="dark horizontal">
-
-                            <div class="alert alert-dark text-white" role="alert">
+                            {% for reject in list_rejects %}
+                            <div class="alert alert-primary text-white" role="alert">
+                                
                                 <span class="alert-icon"><i class="ni ni-fat-remove "></i></span>
-                                <strong>Bo'linmasi</strong> Murojaat sarlavhasi
-                                <span class="badge bg-gradient-primary">Secondary</span>
+                                <strong>{{ reject.user }}</strong> {{ reject.theme }}
+                                <span class="badge bg-gradient-secondary">{{ reject.open_date|date:'d-M' }}</span>
+                                <a href="{{ reject.get_absolute }}">
+                                <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
+                                </a>
                             </div>
-
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -127,11 +131,17 @@
                                 statistikasi</p>
                             <hr class="dark horizontal">
 
-                            <div class="alert alert-primary text-white" role="alert">
+                            {% for done in list_done %}
+                            <div class="alert alert-success text-white" role="alert">
+                                
                                 <span class="alert-icon"><i class="ni ni-check-bold "></i></span>
-                                <strong>Bo'linmasi</strong> Murojaat sarlavhasi
-                                <span class="badge bg-gradient-success">Secondary</span>
+                                <strong>{{ done.user }}</strong> {{ done.theme }}
+                                <span class="badge bg-gradient-secondary">{{ done.open_date|date:'d-M' }}</span>
+                                <a href="{{ done.get_absolute }}">
+                                <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
+                                </a>
                             </div>
+                            {% endfor %}
 
                         </div>
                     </div>
@@ -150,13 +160,17 @@
                             <p class="text-sm ">Bir yillikdagi barcha murojaatlar soni</p>
                             <hr class="dark horizontal">
 
-                            <div class="alert alert-primary text-white" role="alert">
-                                <span class="alert-icon"><i class="ni ni-fat-add"></i></span>
-                                <strong>Bo'linmasi</strong> Murojaat sarlavhasi
-                                <span class="badge bg-gradient-dark">Secondary</span>
-
+                            {% for reject in list_notdone %}
+                            <div class="alert alert-dark text-white" role="alert">
+                                
+                                <span class="alert-icon"><i class="ni ni-fat-add "></i></span>
+                                <strong>{{ reject.user }}</strong> {{ reject.theme }}
+                                <span class="badge bg-gradient-secondary">{{ reject.open_date|date:'d-M' }}</span>
+                                <a href="{{ reject.get_absolute }}">
+                                <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
+                                </a>
                             </div>
-
+                            {% endfor %}
 
                         </div>
                     </div>
@@ -422,7 +436,7 @@
                     borderRadius: 4,
                     borderSkipped: false,
                     backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40, 30, 20, 50, 30, 40],
+                    data: {{ status_rejects }},
                     maxBarThickness: 6
                 },],
             },
@@ -504,7 +518,7 @@
                     borderRadius: 4,
                     borderSkipped: false,
                     backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40, 90, 21, 10, 50, 20],
+                    data: {{ status_done }},
                     maxBarThickness: 6
                 },],
             },
@@ -588,7 +602,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500, 100, 200, 50],
+                    data: {{ status_notdone }},
                     maxBarThickness: 6
 
                 }],
@@ -658,7 +672,7 @@
         new Chart(twoway_chart, {
             type: "pie",
             data: {
-                labels: ['twoway_chart', 'Direct', 'Organic', 'Referral'],
+                labels: {{ twoway_labels| safe }},
                 datasets: [{
                     label: "Projects",
                     weight: 9,
@@ -667,7 +681,7 @@
                     pointRadius: 2,
                     borderWidth: 2,
                     backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
-                    data: [15, 20, 12, 60],
+                    data: {{ twoway_data }},
                     fill: false
                 }],
             },
@@ -718,7 +732,7 @@
         new Chart(bodycam_chart, {
             type: "pie",
             data: {
-                labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
+                labels: {{ bodycam_labels| safe }},
                 datasets: [{
                     label: "Projects",
                     weight: 9,
@@ -727,7 +741,7 @@
                     pointRadius: 2,
                     borderWidth: 2,
                     backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
-                    data: [15, 20, 12, 60],
+                    data: {{ bodycam_data }},
                     fill: false
                 }],
             },
@@ -777,7 +791,7 @@
         new Chart(tablet_chart, {
             type: "pie",
             data: {
-                labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
+                labels: {{ tablet_labels| safe }},
                 datasets: [{
                     label: "Projects",
                     weight: 9,
@@ -786,7 +800,7 @@
                     pointRadius: 2,
                     borderWidth: 2,
                     backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
-                    data: [15, 20, 12, 60],
+                    data: {{ tablet_data }},
                     fill: false
                 }],
             },
