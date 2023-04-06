@@ -1,24 +1,32 @@
 import datetime
 from django.http import FileResponse
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import TemplateView, ListView, RedirectView
+from django.views.generic import TemplateView, ListView, RedirectView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from twowayradio.appm.pdfgen import pdf_printer
 from .models import Depot, Catalog, ModelProduct, Reason
-
-# Create your views here.
-
-
+from twowayradio.models import TwoWay
+from tablet.models import Tablet
+from bodycam.models import BodyCam
+from appeals.models import Appeal
+# Create your views here.    
 class Dashboard(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard.html'
 
     def get(self, request, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["warehouse"] = Depot.objects.all().count()
+        context["twoway"] = TwoWay.objects.all().count() 
+        context["tablet"] = Tablet.objects.all().count() 
+        context["bodycam"] = BodyCam.objects.all().count() 
+        context['status_rejects'] = Appeal.objects.filter(status=None).count()
+        print(context['status_rejects'])
         groups =self.request.user.groups.all()
 
         if 'murojaatchi' in groups:
             return redirect('appeals_list')
         else:
-            return render(request, self.template_name)
+            return render(request, self.template_name, context= context)
 
 class ListDepot(LoginRequiredMixin, ListView):
     model = Depot
