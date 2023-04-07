@@ -40,6 +40,8 @@ class Liable(models.Model):
     def __str__(self):
         return self.full_name
 
+    def get_qrcode(self):
+        return (BodyCam.objects.all().filter(liable__id=self.id)).first()
 
 class BodyCam(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
