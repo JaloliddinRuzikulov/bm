@@ -41,7 +41,7 @@ class Liable(models.Model):
         return self.full_name
 
     def get_qrcode(self):
-        return ((TwoWay.objects.all().filter(liable__id=self.id)).first())['sr_code']
+        return (TwoWay.objects.all().filter(liable__id=self.id)).first()
 
 class TwoWay(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
