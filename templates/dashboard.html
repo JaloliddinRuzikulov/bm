@@ -102,15 +102,15 @@
                                 statistikasi</p>
                             <hr class="dark horizontal">
                             {% for reject in list_rejects %}
-                            <div class="alert alert-primary text-white" role="alert">
-                                
-                                <span class="alert-icon"><i class="ni ni-fat-remove "></i></span>
-                                <strong>{{ reject.user }}</strong> {{ reject.theme }}
-                                <span class="badge bg-gradient-secondary">{{ reject.open_date|date:'d-M' }}</span>
-                                <a href="{{ reject.get_absolute }}">
-                                <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
-                                </a>
-                            </div>
+                                <div class="alert alert-primary text-white" role="alert">
+
+                                    <span class="alert-icon"><i class="ni ni-fat-remove "></i></span>
+                                    <strong>{{ reject.user }}</strong> {{ reject.theme }}
+                                    <span class="badge bg-gradient-secondary">{{ reject.open_date|date:'d-M' }}</span>
+                                    <a href="{{ reject.get_absolute }}">
+                                        <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
+                                    </a>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -132,15 +132,15 @@
                             <hr class="dark horizontal">
 
                             {% for done in list_done %}
-                            <div class="alert alert-success text-white" role="alert">
-                                
-                                <span class="alert-icon"><i class="ni ni-check-bold "></i></span>
-                                <strong>{{ done.user }}</strong> {{ done.theme }}
-                                <span class="badge bg-gradient-secondary">{{ done.open_date|date:'d-M' }}</span>
-                                <a href="{{ done.get_absolute }}">
-                                <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
-                                </a>
-                            </div>
+                                <div class="alert alert-success text-white" role="alert">
+
+                                    <span class="alert-icon"><i class="ni ni-check-bold "></i></span>
+                                    <strong>{{ done.user }}</strong> {{ done.theme }}
+                                    <span class="badge bg-gradient-secondary">{{ done.open_date|date:'d-M' }}</span>
+                                    <a href="{{ done.get_absolute }}">
+                                        <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
+                                    </a>
+                                </div>
                             {% endfor %}
 
                         </div>
@@ -161,15 +161,15 @@
                             <hr class="dark horizontal">
 
                             {% for reject in list_notdone %}
-                            <div class="alert alert-dark text-white" role="alert">
-                                
-                                <span class="alert-icon"><i class="ni ni-fat-add "></i></span>
-                                <strong>{{ reject.user }}</strong> {{ reject.theme }}
-                                <span class="badge bg-gradient-secondary">{{ reject.open_date|date:'d-M' }}</span>
-                                <a href="{{ reject.get_absolute }}">
-                                <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
-                                </a>
-                            </div>
+                                <div class="alert alert-dark text-white" role="alert">
+
+                                    <span class="alert-icon"><i class="ni ni-fat-add "></i></span>
+                                    <strong>{{ reject.user }}</strong> {{ reject.theme }}
+                                    <span class="badge bg-gradient-secondary">{{ reject.open_date|date:'d-M' }}</span>
+                                    <a href="{{ reject.get_absolute }}">
+                                        <span class="badge bg-gradient-secondary">Xatni ko'rish</span>
+                                    </a>
+                                </div>
                             {% endfor %}
 
                         </div>
@@ -337,38 +337,52 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{% static 'assets/img/small-logos/bodycam.svg' %}"
-                                                         class="avatar avatar-sm me-3" alt="jira"
-                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                         title="Hooray!">
-                                                </div>
-                                                <div class=" d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ title }} title</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:" class="avatar avatar-xs rounded-circle"
-                                                   data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                   title="Ryan Tompson">
-                                                    <img src="{% static 'assets/img/team-4.jpg' %}" alt="user5">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class=" align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> 500 </span>
-                                        </td>
-                                        <td class=" align-middle text-center text-sm">
-                                            <span class="badge rounded-pill bg-success text-xxs ml-2 font-weight-bold">13-Aprel 2002</span>
-                                        </td>
-                                    </tr>
-
+                                    {% for events in last_events %}
+                                        {% for event in events %}
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div>
+                                                            {% if forloop.parentloop.counter0 == 0 %}
+                                                                <img src="{% static 'assets/img/small-logos/walkie-talkie.svg' %}"
+                                                                     class="avatar avatar-sm me-3" alt="jira"
+                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                     title="Ratsiya tadbiri">
+                                                            {% elif forloop.parentloop.counter0 == 1 %}
+                                                                <img src="{% static 'assets/img/small-logos/tablet.svg' %}"
+                                                                     class="avatar avatar-sm me-3" alt="jira"
+                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                     title="Planshet tadbiri">
+                                                            {% elif forloop.parentloop.counter0 == 2 %}
+                                                                <img src="{% static 'assets/img/small-logos/bodycam.svg' %}"
+                                                                     class="avatar avatar-sm me-3" alt="jira"
+                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                     title="Body camera tadbiri">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class=" d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{ event.name }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-group mt-2">
+                                                        <a href="javascript:" class="avatar avatar-xs rounded-circle"
+                                                           data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                           title="{{ event.opener }}">
+                                                            <img src="{% static 'assets/img/team-4.jpg' %}" alt="user5">
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td class=" align-middle text-center text-sm">
+                                                    <span class="text-xs font-weight-bold"> 500 </span>
+                                                </td>
+                                                <td class=" align-middle text-center text-sm">
+                                                    <span class="badge rounded-pill bg-success text-xxs ml-2 font-weight-bold">{{ event.pub_date|date:'d-M Y' }}</span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -385,19 +399,28 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="timeline timeline-one-side">
-
-                                <div class="timeline-block mb-3">
+                                {% for liable in liables %}
+                                    {% for liab in liable %}
+                                        <div class="timeline-block mb-3">
                                     <span class="timeline-step">
                                       <i class="material-icons text-danger text-gradient">code</i>
                                     </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Jaloliddin Ahmadaliyev
-                                            #Q231W23
-                                            ratsiyaga biriktirildi</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
-                                    </div>
-                                </div>
-
+                                            <div class="timeline-content">
+                                                <h6 class="text-dark text-sm font-weight-bold mb-0">{{ liab.full_name }}
+                                                    #Q231W23
+                                                    {% if forloop.parentloop.counter0 == 0 %}
+                                                        ratsiyaga
+                                                    {% elif forloop.parentloop.counter0 == 1 %}
+                                                        planshetga
+                                                    {% elif forloop.parentloop.counter0 == 2 %}
+                                                        Body cameraga
+                                                    {% endif %} biriktirildi</h6>
+                                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11
+                                                    PM</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
 
                             </div>
                         </div>

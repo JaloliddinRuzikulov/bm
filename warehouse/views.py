@@ -5,9 +5,9 @@ from django.views.generic import TemplateView, ListView, RedirectView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from twowayradio.appm.pdfgen import pdf_printer
 from .models import Depot, Catalog, ModelProduct, Reason
-from twowayradio.models import TwoWay
-from tablet.models import Tablet
-from bodycam.models import BodyCam
+from twowayradio.models import TwoWay, Event, Liable
+from tablet.models import Tablet, Eventt, Liable as Liablet
+from bodycam.models import BodyCam, Eventb, Liable as Liableb
 from appeals.models import Appeal
 from django.db.models import Count
 # Create your views here.    
@@ -61,8 +61,17 @@ class Dashboard(LoginRequiredMixin, TemplateView):
             bodycam_data.append(BodyCam.objects.filter(region__region_name__exact=bodycam).count())
         context['bodycam_labels'] = str(list(set(bodycam_labels)))
         context['bodycam_data'] = str(list(set(bodycam_data)))
+        last_events = list()
+        last_events.append(Event.objects.all().order_by('pub_date').reverse()[:5])
+        last_events.append(Eventt.objects.all().order_by('pub_date').reverse()[:5])
+        last_events.append(Eventb.objects.all().order_by('pub_date').reverse()[:5])
+        context['last_events'] = last_events
+        liables = list()
+        liables.append(Liable.objects.all().order_by('created_date').reverse()[:5])
+        liables.append(Liablet.objects.all().order_by('created_date').reverse()[:5])
+        liables.append(Liableb.objects.all().order_by('created_date').reverse()[:5])
+        context['liables'] = liables
         groups =self.request.user.groups.all()
-
         if 'murojaatchi' in groups:
             return redirect('appeals_list')
         else:
