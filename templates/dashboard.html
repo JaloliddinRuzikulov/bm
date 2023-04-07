@@ -375,7 +375,7 @@
                                                     </div>
                                                 </td>
                                                 <td class=" align-middle text-center text-sm">
-                                                    <span class="text-xs font-weight-bold"> 500 </span>
+                                                    <span class="text-xs font-weight-bold"> {{ event.get_count }} </span>
                                                 </td>
                                                 <td class=" align-middle text-center text-sm">
                                                     <span class="badge rounded-pill bg-success text-xxs ml-2 font-weight-bold">{{ event.pub_date|date:'d-M Y' }}</span>
@@ -407,7 +407,7 @@
                                     </span>
                                             <div class="timeline-content">
                                                 <h6 class="text-dark text-sm font-weight-bold mb-0">{{ liab.full_name }}
-                                                    #Q231W23
+                                                    #{{ liab.get_qrcode }}
                                                     {% if forloop.parentloop.counter0 == 0 %}
                                                         ratsiyaga
                                                     {% elif forloop.parentloop.counter0 == 1 %}

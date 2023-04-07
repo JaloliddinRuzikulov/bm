@@ -24,6 +24,9 @@ class Event(models.Model):
     def get_absolute_url(self):
         return reverse('events', args=[str(self.id)])
 
+    def get_count(self):
+        return TwoWay.objects.filter(event__id=self.id).count()
+
 class Liable(models.Model):
     full_name = models.CharField(max_length=250)
     description = models.CharField(max_length=250, blank=True)
@@ -37,6 +40,8 @@ class Liable(models.Model):
     def __str__(self):
         return self.full_name
 
+    def get_qrcode(self):
+        return ((TwoWay.objects.all().filter(liable__id=self.id)).first())['sr_code']
 
 class TwoWay(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)

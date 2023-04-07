@@ -25,6 +25,8 @@ class Eventt(models.Model):
     def get_absolute_url(self):
         return reverse('events', args=[str(self.id)])
 
+    def get_count(self):
+        return Tablet.objects.filter(event__id=self.id).count()
 
 class Liable(models.Model):
     full_name = models.CharField(max_length=250)
